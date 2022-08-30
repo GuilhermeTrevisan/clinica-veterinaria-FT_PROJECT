@@ -1,10 +1,13 @@
 package com.mycompany.clinicaveterinaria.Model.DAO;
 import com.mycompany.clinicaveterinaria.Model.Client;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ClientDAO {
     private List<Client> users = new ArrayList<>();
+    private Map<Integer, List<Integer>>  = new HashMap<String, String>();
 
     public ClientDAO() {}
 
