@@ -48,4 +48,16 @@ public class AnimalDAO {
       }
         animals = newAnimals;
     }
+
+    public List<Animal> getAnimalOfUser(int clientId) {
+        List<Animal> clientAnimals = new ArrayList<>();
+
+        for(int i = 0; i < animals.size(); i++) {
+            var animal = animals.get(i);
+            if(animal.getClientId() == clientId) {
+                clientAnimals.add(animal);
+        }
+      }
+      return clientAnimals;
+    }
 }

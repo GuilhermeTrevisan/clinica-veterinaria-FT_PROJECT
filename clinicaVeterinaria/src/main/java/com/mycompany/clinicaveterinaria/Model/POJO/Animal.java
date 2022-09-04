@@ -10,16 +10,22 @@ package com.mycompany.clinicaveterinaria.Model;
  */
 public class Animal {
     private int id;
+    private int clientId;
     private String name;
     private String genre;
 
-    public Animal(String name, String genre) {
+    public Animal(String name, String genre, int clientId) {
         this.name = name;
         this.genre = genre;
+        this.clientId = clientId;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getClientId() {
+        return clientId;
     }
 
     public String getName() {
