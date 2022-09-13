@@ -3,61 +3,101 @@ import com.mycompany.clinicaveterinaria.Model.Animal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimalDAO {
-    private List<Animal> animals = new ArrayList<>();
+public class AnimalDAO extends DAO {
 
-    public AnimalDAO() {}
+    public AnimalDAO() {
+        getConnection();
+        createTable();
+    }
 
-    public List<Animal> getAllUsers() {
-        return animals;
+    public List<Animal> getAllAnimals()) {
+        List<Animal> animais = new ArrayList();
+        String query = "SELECT * FROM animal"
+        ResultSet rs = getResultSet(query);
+        try {
+            while (rs.next()) {
+                animais.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return animais;
     }
     
     public Animal getAnimalById(int id) { 
-        for(int i = 0; i < animals.size(); i++) {
-        var animal = animals.get(i);
-         if(animal.getId() == id) {
-            return animal;
+        String query = "SELECT * FROM animal WHERE id = " + id
+        ResultSet rs = getResultSet(query);
+
+        Animal animal = null;
+        try {
+            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getString("client_id"));
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
         }
-      }
-        return null;
+        return animal;
     }
     
-    public void insertNewAnimal(String name, String genre) {
-        var newAnimal = new Animal(name, genre);
-        animals.add(newAnimal);
+    public void insertNewAnimal(String name, String genre, String speciesId, String clientId) {
+        try {
+            PreparedStatement stmt;
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO animal (name, genre, species_id, client_id) VALUES (?,?,?,?)");
+            stmt.setString(1, name);
+            stmt.setString(2, genre);
+            stmt.setString(3, species_id);
+            stmt.setString(4, clientId);
+            executeUpdate(stmt);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void updateAnimalById(int id, String name, String genre) {
-        for(int i = 0; i < animals.size(); i++) {
-         var animal = animals.get(i);
-         if(animal.getId() == id) {
-            animal.setName(name);
-            animal.setGenre(genre);
+        try {
+            PreparedStatement stmt;
+            stmt = DAO.getConnection().prepareStatement("UPDATE animal SET name=?, genre=?, species_id=?, client_id=? WHERE id=?");
+            stmt.setString(1, name);
+            stmt.setString(2, genre);
+            stmt.setString(3, species_id);
+            stmt.setString(4, client_id);
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
         }
-      }
     }
     
     public void deleteAnimalById(int id) {
-        List<Animal> newAnimals = new ArrayList<>();
-        
-        for(int i = 0; i < animals.size(); i++) {
-            var animal = animals.get(i);
-            if(animal.getId() != id) {
-                newAnimals.add(animal);
+        PreparedStatement stmt;
+        try {
+            stmt = DAO.getConnection().prepareStatement("DELETE FROM animal WHERE id = ?");
+            stmt.setInt(1, id);
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
         }
-      }
-        animals = newAnimals;
     }
 
     public List<Animal> getAnimalOfUser(int clientId) {
-        List<Animal> clientAnimals = new ArrayList<>();
+        String query = "SELECT * FROM animal WHERE client_id = " + id
+        ResultSet rs = getResultSet(query);
 
-        for(int i = 0; i < animals.size(); i++) {
-            var animal = animals.get(i);
-            if(animal.getClientId() == clientId) {
-                clientAnimals.add(animal);
+        List<Animal> animals = new ArrayList();
+        try {
+            while (rs.next()) {
+                animais.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
         }
-      }
-      return clientAnimals;
+        return animals;
+    }
+
+    private Animal buildObject(ResultSet rs) {
+        Animal animal = null;
+        try {
+            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getString("client_id"));
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return animal;
     }
 }

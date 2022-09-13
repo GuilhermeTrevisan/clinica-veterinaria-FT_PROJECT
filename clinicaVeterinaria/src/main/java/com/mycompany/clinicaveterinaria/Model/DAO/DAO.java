@@ -81,8 +81,8 @@ public abstract class DAO {
                     + "id INTEGER PRIMARY KEY, \n"
                     + "name VARCHAR, \n"
                     + "genre VARCHAR, \n"
-                    + "id_especie INTEGER, \n"
-                    + "id_cliente INTEGER); \n");
+                    + "species_id INTEGER, \n"
+                    + "client_id INTEGER); \n");
             executeUpdate(stmt);
             // Species:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS species( \n"
@@ -116,7 +116,7 @@ public abstract class DAO {
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS exam( \n"
                     + "id INTEGER PRIMARY KEY, \n"
                     + "description VARCHAR, \n"
-                    + "id_consulta INTEGER); \n");
+                    + "appointment_id INTEGER); \n");
             executeUpdate(stmt);      
             // Default element for species:
             stmt = DAO.getConnection().prepareStatement("INSERT OR IGNORE INTO especie (id, nome) VALUES (1, 'Cachorro')");
