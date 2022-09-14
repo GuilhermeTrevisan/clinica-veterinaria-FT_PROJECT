@@ -1,18 +1,22 @@
 package com.mycompany.clinicaveterinaria.Model.DAO;
 import com.mycompany.clinicaveterinaria.Model.Animal;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class AnimalDAO extends DAO {
 
     public AnimalDAO() {
         getConnection();
-        createTable();
+        createAllTables();
     }
 
-    public List<Animal> getAllAnimals()) {
+    public List<Animal> getAllAnimals() {
         List<Animal> animais = new ArrayList();
-        String query = "SELECT * FROM animal"
+        String query = "SELECT * FROM animal";
         ResultSet rs = getResultSet(query);
         try {
             while (rs.next()) {
@@ -25,7 +29,7 @@ public class AnimalDAO extends DAO {
     }
     
     public Animal getAnimalById(int id) { 
-        String query = "SELECT * FROM animal WHERE id = " + id
+        String query = "SELECT * FROM animal WHERE id = " + id;
         ResultSet rs = getResultSet(query);
 
         Animal animal = null;
@@ -43,7 +47,7 @@ public class AnimalDAO extends DAO {
             stmt = DAO.getConnection().prepareStatement("INSERT INTO animal (name, genre, species_id, client_id) VALUES (?,?,?,?)");
             stmt.setString(1, name);
             stmt.setString(2, genre);
-            stmt.setString(3, species_id);
+            stmt.setString(3, speciesId);
             stmt.setString(4, clientId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
@@ -51,7 +55,7 @@ public class AnimalDAO extends DAO {
         }
     }
     
-    public void updateAnimalById(int id, String name, String genre) {
+    public void updateAnimalById(int id, String name, String genre, String species_id, String client_id) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("UPDATE animal SET name=?, genre=?, species_id=?, client_id=? WHERE id=?");
@@ -77,13 +81,13 @@ public class AnimalDAO extends DAO {
     }
 
     public List<Animal> getAnimalOfUser(int clientId) {
-        String query = "SELECT * FROM animal WHERE client_id = " + id
+        String query = "SELECT * FROM animal WHERE client_id = " + clientId;
         ResultSet rs = getResultSet(query);
 
         List<Animal> animals = new ArrayList();
         try {
             while (rs.next()) {
-                animais.add(buildObject(rs));
+                animals.add(buildObject(rs));
             }
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
