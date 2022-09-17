@@ -67,4 +67,9 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    @Override
+    public String toString() {
+        return this.name + ", " + this.address + ", " + this.number + ", " + this.cep + ", " + this.email + " \n";
+    }
 }

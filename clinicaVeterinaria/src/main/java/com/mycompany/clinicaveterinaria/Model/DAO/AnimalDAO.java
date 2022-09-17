@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AnimalDAO extends DAO {
@@ -34,7 +35,7 @@ public class AnimalDAO extends DAO {
 
         Animal animal = null;
         try {
-            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getString("client_id"));
+            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getInt("client_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -51,7 +52,7 @@ public class AnimalDAO extends DAO {
             stmt.setString(4, clientId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -98,7 +99,7 @@ public class AnimalDAO extends DAO {
     private Animal buildObject(ResultSet rs) {
         Animal animal = null;
         try {
-            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getString("client_id"));
+            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getInt("client_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

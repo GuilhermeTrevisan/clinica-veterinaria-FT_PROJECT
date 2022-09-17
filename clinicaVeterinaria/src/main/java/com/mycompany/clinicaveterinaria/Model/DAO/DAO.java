@@ -102,7 +102,7 @@ public abstract class DAO {
                     + "id INTEGER PRIMARY KEY, \n"
                     + "id_animal INTEGER, \n"
                     + "initDate TEXT, \n"
-                    + "finishDate TEXT, \n");
+                    + "finishDate TEXT); \n");
             executeUpdate(stmt);
             // Appointment:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS appointment( \n"
@@ -111,16 +111,16 @@ public abstract class DAO {
                     + "historic VARCHAR, \n"
                     + "id_animal INTEGER, \n"
                     + "id_vet INTEGER, \n"
-                    + "id_tratamento INTEGER, \n");
+                    + "id_tratamento INTEGER); \n");
             executeUpdate(stmt);            
              // Exam:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS exam( \n"
                     + "id INTEGER PRIMARY KEY, \n"
                     + "description VARCHAR, \n"
                     + "appointment_id INTEGER); \n");
-            executeUpdate(stmt);      
+            executeUpdate(stmt);
             // Default element for species:
-            stmt = DAO.getConnection().prepareStatement("INSERT OR IGNORE INTO especie (id, nome) VALUES (1, 'Cachorro')");
+            stmt = DAO.getConnection().prepareStatement("INSERT OR IGNORE INTO species (id, name) VALUES (1, 'Cachorro')");
             executeUpdate(stmt);
             return true;
         } catch (SQLException ex) {

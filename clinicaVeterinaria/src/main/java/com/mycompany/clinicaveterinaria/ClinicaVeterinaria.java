@@ -5,6 +5,8 @@
 
 package com.mycompany.clinicaveterinaria;
 
+import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
+
 /**
  *
  * @author g170959
@@ -13,5 +15,9 @@ public class ClinicaVeterinaria {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        
+        ClientDAO clientDB = new ClientDAO();
+       
+         System.out.println(clientDB.getAllUsers().toString());
     }
 }

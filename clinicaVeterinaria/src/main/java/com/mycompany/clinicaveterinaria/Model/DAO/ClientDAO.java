@@ -1,19 +1,23 @@
 package com.mycompany.clinicaveterinaria.Model.DAO;
 import com.mycompany.clinicaveterinaria.Model.Client;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClientDAO extends DAO {
 
     public ClientDAO() {
         getConnection();
-        createTable();
+        createAllTables();
     }
 
     public List<Client> getAllUsers() {
-        List<Cliente> clientes = new ArrayList();
+        List<Client> clientes = new ArrayList();
+        String query = "SELECT * FROM client";
         ResultSet rs = getResultSet(query);
         try {
             while (rs.next()) {
@@ -26,12 +30,12 @@ public class ClientDAO extends DAO {
     }
     
     public Client getUserById(int id) {
-        String query = "SELECT * FROM client WHERE id = " + id
+        String query = "SELECT * FROM client WHERE id = " + id;
         ResultSet rs = getResultSet(query);
 
-        Cliente cliente = null;
+        Client cliente = null;
         try {
-            cliente = new Cliente(rs.getString("name"), rs.getString("address"), rs.getString("number"), rs.getString("cep"), rs.getString("email"));
+            cliente = new Client(rs.getString("name"), rs.getString("address"), rs.getString("number"), Long.parseLong(rs.getString("cep")), rs.getString("email"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -45,11 +49,11 @@ public class ClientDAO extends DAO {
             stmt.setString(1, name);
             stmt.setString(2, address);
             stmt.setString(3, number);
-            stmt.setString(4, cep);
+            stmt.setLong(4, cep);
             stmt.setString(5, email);
             executeUpdate(stmt);
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -58,9 +62,9 @@ public class ClientDAO extends DAO {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("UPDATE client SET name=?, addres=?, number=?, cep=?, email=? WHERE id=?");
             stmt.setString(1, name);
-            stmt.setString(2, addres);
+            stmt.setString(2, address);
             stmt.setString(3, number);
-            stmt.setString(4, cep);
+            stmt.setLong(4, cep);
             stmt.setString(5, email);
             stmt.setInt(6, id);
             executeUpdate(stmt);
@@ -80,10 +84,10 @@ public class ClientDAO extends DAO {
         }
     }
 
-    private Cliente buildObject(ResultSet rs) {
-        Cliente cliente = null;
+    private Client buildObject(ResultSet rs) {
+        Client cliente = null;
         try {
-            cliente = new Cliente(rs.getString("name"), rs.getString("address"), rs.getString("number"), rs.getString("cep"), rs.getString("email"));
+            cliente = new Client(rs.getString("name"), rs.getString("address"), rs.getString("number"), rs.getLong("cep"), rs.getString("email"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
