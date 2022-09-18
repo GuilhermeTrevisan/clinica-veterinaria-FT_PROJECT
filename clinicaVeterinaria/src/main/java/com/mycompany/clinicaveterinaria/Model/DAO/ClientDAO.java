@@ -1,5 +1,5 @@
 package com.mycompany.clinicaveterinaria.Model.DAO;
-import com.mycompany.clinicaveterinaria.Model.Client;
+import com.mycompany.clinicaveterinaria.Model.POJO.Client;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +60,7 @@ public class ClientDAO extends DAO {
     public void updateClientById(int id, String name, String address, String number, long cep, String email) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE client SET name=?, addres=?, number=?, cep=?, email=? WHERE id=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE client SET name=?, address=?, number=?, cep=?, email=? WHERE id=?");
             stmt.setString(1, name);
             stmt.setString(2, address);
             stmt.setString(3, number);

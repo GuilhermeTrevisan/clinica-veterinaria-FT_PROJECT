@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.clinicaveterinaria.Model;
+package com.mycompany.clinicaveterinaria.Model.POJO;
 
 /**
  *
@@ -48,4 +48,8 @@ public class Veterinary {
         this.number = number;
     }
     
+    @Override
+    public String toString() {
+        return this.name + ", " + this.address + ", " + this.number + " \n";
+    }
 }

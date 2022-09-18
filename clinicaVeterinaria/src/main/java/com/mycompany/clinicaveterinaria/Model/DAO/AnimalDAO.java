@@ -1,5 +1,5 @@
 package com.mycompany.clinicaveterinaria.Model.DAO;
-import com.mycompany.clinicaveterinaria.Model.Animal;
+import com.mycompany.clinicaveterinaria.Model.POJO.Animal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,6 +64,7 @@ public class AnimalDAO extends DAO {
             stmt.setString(2, genre);
             stmt.setString(3, species_id);
             stmt.setString(4, client_id);
+            stmt.setInt(5, id);
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());

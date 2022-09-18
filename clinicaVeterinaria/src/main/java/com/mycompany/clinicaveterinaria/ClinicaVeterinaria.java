@@ -5,7 +5,8 @@
 
 package com.mycompany.clinicaveterinaria;
 
-import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
+import java.sql.Date;
 
 /**
  *
@@ -16,8 +17,26 @@ public class ClinicaVeterinaria {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         
-        ClientDAO clientDB = new ClientDAO();
-       
-         System.out.println(clientDB.getAllUsers().toString());
+        //testar:
+        // get all
+        // get by id
+        // insert new
+        // update
+        // delete
+        
+        // appoint
+        // species
+        // treatement
+        // veterinary
+        
+        MedicalAppointmentDAO db = new MedicalAppointmentDAO();
+        
+        db.insertNewAppointment(new Date(2022, 2, 14), "primeira consulta", 2, 3, 1);
+        
+        //db.updateAppointmentById(1, date, "segunda consulta", 2, 3, 1);
+        //db.deleteAppointmentById(1);
+        
+        System.out.println(db.getAppointmentById(1).toString());
+        System.out.println(db.getAllAppointments().toString());
     }
 }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.clinicaveterinaria.Model;
+package com.mycompany.clinicaveterinaria.Model.POJO;
 import java.util.Date;
 
 /**
@@ -39,4 +39,8 @@ public class Treatment {
         this.finishDate = finishDate;
     }
     
+    @Override
+    public String toString() {
+        return this.startDate + ", " + this.finishDate + " \n";
+    }
 }
