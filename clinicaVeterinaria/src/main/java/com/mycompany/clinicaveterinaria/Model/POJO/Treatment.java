@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.clinicaveterinaria.Model.POJO;
-import java.util.Date;
 
 /**
  *
@@ -11,32 +10,42 @@ import java.util.Date;
  */
 public class Treatment {
     private int id;
-    private Date startDate;
-    private Date finishDate;
+    private String startDate;
+    private String finishDate;
+    private int animalId;
 
-    public Treatment(Date startDate, Date finishDate) {
+    public Treatment(String startDate, String finishDate, int animalId) {
         this.startDate = startDate;
         this.finishDate = finishDate;
+        this.animalId = animalId;
     }
     
     public int getId() {
         return id;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getFinishDate() {
+    public String getFinishDate() {
         return finishDate;
     }
 
-    public void setFinishDate(Date finishDate) {
+    public void setFinishDate(String finishDate) {
         this.finishDate = finishDate;
+    }
+
+    public int getAnimalId() {
+        return animalId;
+    }
+
+    public void setAnimalId(int animalId) {
+        this.animalId = animalId;
     }
     
     @Override

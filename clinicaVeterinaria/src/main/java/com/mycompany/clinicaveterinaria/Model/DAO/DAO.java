@@ -107,7 +107,7 @@ public abstract class DAO {
             // Appointment:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS appointment( \n"
                     + "id INTEGER PRIMARY KEY, \n"
-                    + "date TEXT, \n"
+                    + "date DATE, \n"
                     + "historic VARCHAR, \n"
                     + "id_animal INTEGER, \n"
                     + "id_vet INTEGER, \n"

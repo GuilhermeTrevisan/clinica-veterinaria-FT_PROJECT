@@ -5,9 +5,7 @@
 
 package com.mycompany.clinicaveterinaria;
 
-import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
-import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
-import java.sql.Date;
+import java.text.ParseException;
 
 /**
  *
@@ -15,25 +13,7 @@ import java.sql.Date;
  */
 public class ClinicaVeterinaria {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         System.out.println("Hello World!");
-        
-        //testar:
-        // get all
-        // get by id
-        // insert new
-        // update
-        // delete
-        
-        // appoint (esse tá com problema no parse o date do get)
-        // treatement (esse tbm deu problema no date)
-        
-        //db.insertNewAppointment(new Date(2022, 2, 14), "primeira consulta", 2, 3, 1);
-        
-        //db.updateAppointmentById(1, date, "segunda consulta", 2, 3, 1);
-        //db.deleteAppointmentById(1);
-        
-//        System.out.println(db.getAppointmentById(1).toString());
-//        System.out.println(db.getAllAppointments().toString());
     }
 }

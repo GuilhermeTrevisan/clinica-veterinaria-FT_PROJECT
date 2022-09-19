@@ -44,32 +44,34 @@ public class TreatmentDAO extends DAO {
 
         Treatment treatment = null;
         try {
-            treatment = new Treatment(rs.getDate("initDate"), rs.getDate("finishDate"));
+            treatment = new Treatment(rs.getString("initDate"), rs.getString("finishDate"), rs.getInt("id_animal"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
         return treatment;
     }
     
-    public void insertNewTreatment(String initDate, String finishDate) {
+    public void insertNewTreatment(String initDate, String finishDate, int animalId) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO treatment (initDate, finishDate) VALUES (?,?)");
-            stmt.setString(1, initDate);
-            stmt.setString(2, finishDate);
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO treatment (id_animal, initDate, finishDate) VALUES (?,?,?)");
+            stmt.setInt(1, animalId);
+            stmt.setString(2, initDate);
+            stmt.setString(3, finishDate);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(TreatmentDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void updateTreatmentById(int id, String initDate, String finishDate) {
+    public void updateTreatmentById(int id, String initDate, String finishDate, int animalId) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE treatment SET initDate=?, finishDate=? WHERE id=?");
-            stmt.setString(1, initDate);
-            stmt.setString(2, finishDate);
-            stmt.setInt(3, id);
+            stmt = DAO.getConnection().prepareStatement("UPDATE treatment SET id_animal=?, initDate=?, finishDate=? WHERE id=?");
+            stmt.setInt(1, animalId);
+            stmt.setString(2, initDate);
+            stmt.setString(3, finishDate);
+            stmt.setInt(4, id);
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
@@ -90,7 +92,7 @@ public class TreatmentDAO extends DAO {
     private Treatment buildObject(ResultSet rs) {
         Treatment treatment = null;
         try {
-            treatment = new Treatment(rs.getDate("initDate"), rs.getDate("finishDate"));
+            treatment = new Treatment(rs.getString("initDate"), rs.getString("finishDate"), rs.getInt("id_animal"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

@@ -6,10 +6,10 @@ package com.mycompany.clinicaveterinaria.Model.DAO;
 
 import static com.mycompany.clinicaveterinaria.Model.DAO.DAO.getConnection;
 import com.mycompany.clinicaveterinaria.Model.POJO.MedicalAppointment;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,24 +40,24 @@ public class MedicalAppointmentDAO extends DAO {
         return appoints;
     }
     
-    public MedicalAppointment getAppointmentById(int id) {
+    public MedicalAppointment getAppointmentById(int id) throws ParseException {
         String query = "SELECT * FROM appointment WHERE id = " + id;
         ResultSet rs = getResultSet(query);
 
         MedicalAppointment appoint = null;
         try {
-            appoint = new MedicalAppointment(rs.getDate("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
+            appoint = new MedicalAppointment(rs.getString("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
         return appoint;
     }
     
-    public void insertNewAppointment(Date date, String historic, int animalId, int vetId, int treatmentId) {
+    public void insertNewAppointment(String date, String historic, int animalId, int vetId, int treatmentId) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("INSERT INTO appointment (date, historic, id_animal, id_vet, id_tratamento) VALUES (?,?,?,?,?)");
-            stmt.setDate(1, date);
+            stmt.setString(1, date);
             stmt.setString(2, historic);
             stmt.setInt(3, animalId);
             stmt.setInt(4, vetId);
@@ -68,11 +68,11 @@ public class MedicalAppointmentDAO extends DAO {
         }
     }
     
-    public void updateAppointmentById(int id, Date date, String historic, int animalId, int vetId, int treatmentId) {
+    public void updateAppointmentById(int id, String date, String historic, int animalId, int vetId, int treatmentId) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("UPDATE appointment SET date=?, historic=?, id_animal=?, id_vet=?, id_tratamento=? WHERE id=?");
-            stmt.setDate(1, date);
+            stmt.setString(1, date);
             stmt.setString(2, historic);
             stmt.setInt(3, animalId);
             stmt.setInt(4, vetId);
@@ -98,7 +98,7 @@ public class MedicalAppointmentDAO extends DAO {
     private MedicalAppointment buildObject(ResultSet rs) {
         MedicalAppointment appoint = null;
         try {
-            appoint = new MedicalAppointment(rs.getDate("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
+            appoint = new MedicalAppointment(rs.getString("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

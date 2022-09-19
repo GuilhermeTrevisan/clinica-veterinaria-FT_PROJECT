@@ -11,13 +11,13 @@ import java.util.Date;
  */
 public class MedicalAppointment {
     private int id;
-    private Date date;
+    private String date;
     private String historic;
     private int animalId;
     private int veterinaryId;
     private int treatmentId;
 
-    public MedicalAppointment(Date date, String historic, int animalId, int veterinaryId, int treatmentId) {
+    public MedicalAppointment(String date, String historic, int animalId, int veterinaryId, int treatmentId) {
         this.date = date;
         this.historic = historic;
         this.animalId = animalId;
@@ -29,11 +29,11 @@ public class MedicalAppointment {
         return id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
