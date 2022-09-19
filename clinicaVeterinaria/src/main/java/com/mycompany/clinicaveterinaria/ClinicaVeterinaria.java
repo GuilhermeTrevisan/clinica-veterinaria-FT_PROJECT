@@ -5,7 +5,8 @@
 
 package com.mycompany.clinicaveterinaria;
 
-import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
 import java.sql.Date;
 
 /**
@@ -24,19 +25,15 @@ public class ClinicaVeterinaria {
         // update
         // delete
         
-        // appoint
-        // species
-        // treatement
-        // veterinary
+        // appoint (esse tá com problema no parse o date do get)
+        // treatement (esse tbm deu problema no date)
         
-        MedicalAppointmentDAO db = new MedicalAppointmentDAO();
-        
-        db.insertNewAppointment(new Date(2022, 2, 14), "primeira consulta", 2, 3, 1);
+        //db.insertNewAppointment(new Date(2022, 2, 14), "primeira consulta", 2, 3, 1);
         
         //db.updateAppointmentById(1, date, "segunda consulta", 2, 3, 1);
         //db.deleteAppointmentById(1);
         
-        System.out.println(db.getAppointmentById(1).toString());
-        System.out.println(db.getAllAppointments().toString());
+//        System.out.println(db.getAppointmentById(1).toString());
+//        System.out.println(db.getAllAppointments().toString());
     }
 }

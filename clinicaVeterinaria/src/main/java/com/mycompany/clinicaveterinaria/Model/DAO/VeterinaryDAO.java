@@ -18,14 +18,14 @@ import java.util.logging.Logger;
  *
  * @author Guizera
  */
-public class VaterinaryDAO extends DAO {
+public class VeterinaryDAO extends DAO {
     
-    public VaterinaryDAO() {
+    public VeterinaryDAO() {
         getConnection();
         createAllTables();
     }
 
-    public List<Veterinary> getAllSpecies() {
+    public List<Veterinary> getAllVeterinaries() {
         List<Veterinary> veterinaries = new ArrayList();
         String query = "SELECT * FROM veterinary";
         ResultSet rs = getResultSet(query);
@@ -52,23 +52,27 @@ public class VaterinaryDAO extends DAO {
         return veterinary;
     }
     
-    public void insertNewVeterinary(String name) {
+    public void insertNewVeterinary(String name, String address, String number) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO veterinary (name) VALUES (?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO veterinary (name, address, number) VALUES (?,?,?)");
             stmt.setString(1, name);
+            stmt.setString(2, address);
+            stmt.setString(3, number);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(SpeciesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void updateVeterinaryById(int id, String name) {
+    public void updateVeterinaryById(int id, String name, String address, String number) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE veterinary SET name=? WHERE id=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE veterinary SET name=?, address=?, number=? WHERE id=?");
             stmt.setString(1, name);
-            stmt.setInt(2, id);
+            stmt.setString(2, address);
+            stmt.setString(3, number);
+            stmt.setInt(4, id);
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
