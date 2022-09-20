@@ -5,7 +5,6 @@
 
 package com.mycompany.clinicaveterinaria;
 
-import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
 import java.text.ParseException;
 
 /**
