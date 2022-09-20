@@ -42,6 +42,20 @@ public class AnimalDAO extends DAO {
         return animal;
     }
     
+    public List<Animal> getAnimalByClientId(int id) { 
+        String query = "SELECT * FROM animal WHERE client_id = " + id;
+        List<Animal> animais = new ArrayList();
+        ResultSet rs = getResultSet(query);
+        try {
+            while (rs.next()) {
+                animais.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return animais;
+    }
+    
     public void insertNewAnimal(String name, String genre, String speciesId, String clientId) {
         try {
             PreparedStatement stmt;
