@@ -1,5 +1,4 @@
 package TableModel;
-import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
 import com.mycompany.clinicaveterinaria.Model.POJO.MedicalAppointment;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -14,8 +13,6 @@ import javax.swing.table.TableColumn;
 public class AppointmentTableModel extends AbstractTableModel {
     protected ArrayList<MedicalAppointment> vDados;
     protected String[] colunas;
-    
-    private MedicalAppointmentDAO dao = new MedicalAppointmentDAO();
 
     public AppointmentTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
@@ -104,20 +101,20 @@ public class AppointmentTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
+        MedicalAppointment appoint = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return this.vDados.get(rowIndex).getDate();
+                return appoint.getDate();
             case 1:
-                return this.vDados.get(rowIndex).getHistoric();
+                return appoint.getHistoric();
             case 2:
-                return this.vDados.get(rowIndex).getAnimalId();
+                return appoint.getAnimalId();
             case 3:
-                return this.vDados.get(rowIndex).getVeterinaryId();
+                return appoint.getVeterinaryId();
             case 4:
-                return this.vDados.get(rowIndex).getTreatment_id();
+                return appoint.getTreatment_id();
             default:
-                return this.vDados.get(rowIndex);
+                return new Object();
         }
     }
 }//GenericTableModel
