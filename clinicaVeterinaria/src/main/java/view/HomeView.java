@@ -3,12 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
-import com.mycompany.clinicaveterinaria.Model.POJO.Client;
-import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
-import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
-import com.mycompany.clinicaveterinaria.Model.POJO.Animal;
-import java.util.List;
+import com.mycompany.clinicaveterinaria.Controller.MainController;
 
 /**
  *
@@ -16,9 +11,7 @@ import java.util.List;
  */
 public class HomeView extends javax.swing.JFrame {
 
-    ClientDAO clientDB = new ClientDAO();
-    AnimalDAO animalDB = new AnimalDAO();
-    MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
+    MainController controller = new MainController();
     
     /**
      * Creates new form NewJFrame
@@ -144,7 +137,7 @@ public class HomeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        this.jTable1.setModel(new AppointmentTableModel(appointDB.getAllAppointments(), String[""]);
+        this.jTable1.setModel(controller.getTableModelOf("appointment"));
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**

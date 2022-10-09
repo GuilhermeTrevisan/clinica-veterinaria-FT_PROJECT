@@ -1,4 +1,5 @@
-package view;
+package TableModel;
+import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
 import com.mycompany.clinicaveterinaria.Model.POJO.MedicalAppointment;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -13,6 +14,8 @@ import javax.swing.table.TableColumn;
 public class AppointmentTableModel extends AbstractTableModel {
     protected ArrayList<MedicalAppointment> vDados;
     protected String[] colunas;
+    
+    private MedicalAppointmentDAO dao = new MedicalAppointmentDAO();
 
     public AppointmentTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
@@ -77,7 +80,6 @@ public class AppointmentTableModel extends AbstractTableModel {
         }
     }
 
-    // Daqui pra baixo metodos adaptados de ViniGodoy - Curitiba - PR
     public void selectAndScroll(JTable table, int rowIndex) {
         table.getSelectionModel().setSelectionInterval(rowIndex, rowIndex);
         scrollToVisible(table, rowIndex);
@@ -102,6 +104,20 @@ public class AppointmentTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        switch(columnIndex) {
+            case 0:
+                return this.vDados.get(rowIndex).getDate();
+            case 1:
+                return this.vDados.get(rowIndex).getHistoric();
+            case 2:
+                return this.vDados.get(rowIndex).getAnimalId();
+            case 3:
+                return this.vDados.get(rowIndex).getVeterinaryId();
+            case 4:
+                return this.vDados.get(rowIndex).getTreatment_id();
+            default:
+                return this.vDados.get(rowIndex);
+        }
     }
 }//GenericTableModel
