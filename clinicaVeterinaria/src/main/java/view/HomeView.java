@@ -81,6 +81,11 @@ public class HomeView extends javax.swing.JFrame {
         });
 
         jRadioButton3.setText("Animais");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
 
         jRadioButton4.setText("Veterinários");
 
@@ -147,6 +152,10 @@ public class HomeView extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         this.jTable1.setModel(controller.getTableModelOf("client"));
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        this.jTable1.setModel(controller.getTableModelOf("animal"));
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     /**
      * @param args the command line arguments

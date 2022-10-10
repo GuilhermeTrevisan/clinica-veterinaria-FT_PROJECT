@@ -35,7 +35,7 @@ public class AnimalDAO extends DAO {
 
         Animal animal = null;
         try {
-            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getInt("client_id"));
+            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getInt("client_id"), rs.getInt("species_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -114,7 +114,7 @@ public class AnimalDAO extends DAO {
     private Animal buildObject(ResultSet rs) {
         Animal animal = null;
         try {
-            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getInt("client_id"));
+            animal = new Animal(rs.getString("name"), rs.getString("genre"), rs.getInt("client_id"), rs.getInt("species_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

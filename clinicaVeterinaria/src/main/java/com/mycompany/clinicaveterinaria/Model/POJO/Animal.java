@@ -11,13 +11,16 @@ package com.mycompany.clinicaveterinaria.Model.POJO;
 public class Animal {
     private int id;
     private int clientId;
+    private int speciesId;
+
     private String name;
     private String genre;
 
-    public Animal(String name, String genre, int clientId) {
+    public Animal(String name, String genre, int clientId, int speciesId) {
         this.name = name;
         this.genre = genre;
         this.clientId = clientId;
+        this.speciesId = speciesId;
     }
 
     public int getId() {
@@ -26,6 +29,10 @@ public class Animal {
 
     public int getClientId() {
         return clientId;
+    }
+    
+    public int getSpeciesId() {
+        return speciesId;
     }
 
     public String getName() {

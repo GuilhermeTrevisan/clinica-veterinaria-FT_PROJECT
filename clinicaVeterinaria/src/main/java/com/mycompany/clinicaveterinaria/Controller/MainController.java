@@ -7,7 +7,10 @@ package com.mycompany.clinicaveterinaria.Controller;
 import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
 import javax.swing.table.AbstractTableModel;
 import TableModel.AppointmentTableModel;
+import TableModel.ClientTableModel;
+import TableModel.AnimalTableModel;
 import TableModel.EmptyTableModel;
+import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
 
 /**
@@ -20,16 +23,19 @@ public class MainController {
     public AbstractTableModel getTableModelOf(String tableModel) {
         if(tableModel.equals("appointment")) {
             MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
-            String[] appointColumns = {"date", "historic", "id_animal", "id_vet", "id_tratamento"};
-            return new AppointmentTableModel(appointDB.getAllAppointments(), appointColumns);
+            String[] columns = {"date", "historic", "id_animal", "id_vet", "id_tratamento"};
+            return new AppointmentTableModel(appointDB.getAllAppointments(), columns);
             
         } else if(tableModel.equals("client")) {
-            
             ClientDAO clientDB = new ClientDAO();
-            // colocar as colunas da tabela cliente aqui: String[] appointColumns = {"date", "historic", "id_animal", "id_vet", "id_tratamento"};
+            String[] columns = {"name", "address", "cep", "email", "number"};
+            return new ClientTableModel(clientDB.getAllUsers(), columns);
             
-            // Criar o TableModel de cliente e depois do resto das coisas
-            return new AppointmentTableModel(clientDB.getAllUsers(), appointColumns);
+            // todos os radio buttons tão podendo ser selecionados ao mesmo tempo, tem q dar um jeito de deixar só 1
+        } else if(tableModel.equals("animal")) {
+            AnimalDAO animalDB = new AnimalDAO();
+            String[] columns = {"name", "genre", "species_id", "client_id"};
+            return new AnimalTableModel(animalDB.getAllAnimals(), columns);
             
             // todos os radio buttons tão podendo ser selecionados ao mesmo tempo, tem q dar um jeito de deixar só 1
         } else {
