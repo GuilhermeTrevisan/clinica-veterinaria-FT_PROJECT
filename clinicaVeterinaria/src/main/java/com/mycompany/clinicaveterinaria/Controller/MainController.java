@@ -20,6 +20,13 @@ import com.mycompany.clinicaveterinaria.Model.DAO.ExamDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.SpeciesDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
+import view.NewAnimalWindow;
+import view.NewAppointWindow;
+import view.NewClientWindow;
+import view.NewExamWindow;
+import view.NewSpeciesWindow;
+import view.NewTreatmentWindow;
+import view.NewVetWindow;
 
 /**
  *
@@ -68,5 +75,47 @@ public class MainController {
             default:
                 return new EmptyTableModel();
         }
-    } 
+    }
+    
+    public void openCreateViewFor(String section) {
+        switch (section) {
+            case "appointment":
+                NewAppointWindow appointFrame = new NewAppointWindow();
+                appointFrame.setVisible(true);
+                break;
+                
+            case "client":
+                NewClientWindow clientFrame = new NewClientWindow();
+                clientFrame.setVisible(true);
+                break;
+                
+            case "animal":         
+                NewAnimalWindow animalFrame = new NewAnimalWindow();
+                animalFrame.setVisible(true);
+                break;
+
+            case "veterinary":
+                NewVetWindow vetFrame = new NewVetWindow();
+                vetFrame.setVisible(true);
+                break;
+                
+            case "species":
+                NewSpeciesWindow speciesFrame = new NewSpeciesWindow();
+                speciesFrame.setVisible(true);
+                break;
+                
+            case "exam":
+                NewExamWindow examFrame = new NewExamWindow();
+                examFrame.setVisible(true);
+                break;
+                
+            case "treatment":
+                NewTreatmentWindow treatmentFrame = new NewTreatmentWindow();
+                treatmentFrame.setVisible(true);
+                break;
+                
+            default:
+                // open screen
+        }
+    }
 }
