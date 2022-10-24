@@ -4,11 +4,15 @@
  */
 package view;
 
+import com.mycompany.clinicaveterinaria.Controller.NewTreatmentController;
+
 /**
  *
  * @author Guizera
  */
 public class NewTreatmentWindow extends javax.swing.JFrame {
+    
+    private NewTreatmentController controller = new NewTreatmentController();
 
     /**
      * Creates new form NewTreatmentWindow
@@ -38,11 +42,11 @@ public class NewTreatmentWindow extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Inserir novo tratamento");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("data de início");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("data de fim");
 
-        jTextField3.setText("jTextField3");
+        jTextField3.setText("animal");
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -52,6 +56,11 @@ public class NewTreatmentWindow extends javax.swing.JFrame {
         });
 
         jButton2.setText("salvar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,6 +109,12 @@ public class NewTreatmentWindow extends javax.swing.JFrame {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        controller.insert(jTextField1.getText(), jTextField2.getText(), Integer.parseInt(jTextField3.getText()));
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
