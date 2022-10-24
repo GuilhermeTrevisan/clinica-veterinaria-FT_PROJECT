@@ -4,11 +4,15 @@
  */
 package view;
 
+import com.mycompany.clinicaveterinaria.Controller.NewExamController;
+
 /**
  *
  * @author Guizera
  */
 public class NewExamWindow extends javax.swing.JFrame {
+    
+    private NewExamController controller = new NewExamController();
 
     /**
      * Creates new form NewExamWindow
@@ -37,9 +41,9 @@ public class NewExamWindow extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Inserir novo exame");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("descrição");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("consulta");
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +53,11 @@ public class NewExamWindow extends javax.swing.JFrame {
         });
 
         jButton2.setText("salvar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,7 +76,7 @@ public class NewExamWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addComponent(jButton1)
-                        .addGap(46, 46, 46)
+                        .addGap(55, 55, 55)
                         .addComponent(jButton2)))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
@@ -94,6 +103,12 @@ public class NewExamWindow extends javax.swing.JFrame {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        controller.insert(jTextField1.getText(), Integer.parseInt(jTextField2.getText()));
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
