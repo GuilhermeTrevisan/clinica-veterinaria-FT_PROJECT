@@ -12,13 +12,14 @@ import com.mycompany.clinicaveterinaria.Controller.MainController;
 public class HomeView extends javax.swing.JFrame {
 
     MainController controller = new MainController();
-    String viewSelected = "";
+    String viewSelected = "appointment";
     
     /**
      * Creates new form NewJFrame
      */
     public HomeView() {
-        initComponents();             
+        initComponents();
+        this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }
 
     /**

@@ -4,11 +4,15 @@
  */
 package view;
 
+import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
+
 /**
  *
  * @author Guizera
  */
 public class NewAppointWindow extends javax.swing.JFrame {
+    
+    private MedicalAppointmentDAO controller = new MedicalAppointmentDAO();
 
     /**
      * Creates new form NewAppointWindow
@@ -38,19 +42,29 @@ public class NewAppointWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("data");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("histórico");
 
-        jTextField3.setText("jTextField3");
+        jTextField3.setText("animal");
 
-        jTextField4.setText("jTextField4");
+        jTextField4.setText("veterinário");
 
-        jTextField5.setText("jTextField5");
+        jTextField5.setText("tratamento");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("salvar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Inserir nova consulta");
@@ -63,15 +77,17 @@ public class NewAppointWindow extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(51, 51, 51)
-                            .addComponent(jButton2))
                         .addComponent(jTextField1)
                         .addComponent(jTextField2)
                         .addComponent(jTextField3)
                         .addComponent(jTextField4)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jButton1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2)
+                            .addGap(26, 26, 26)))
                     .addComponent(jLabel1))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -110,6 +126,17 @@ public class NewAppointWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        controller.insertNewAppointment(jTextField1.getText(), jTextField2.getText(), Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField4.getText()), Integer.parseInt(jTextField4.getText()));
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

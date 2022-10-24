@@ -4,11 +4,15 @@
  */
 package view;
 
+import com.mycompany.clinicaveterinaria.Controller.NewClientController;
+
 /**
  *
  * @author Guizera
  */
 public class NewClientWindow extends javax.swing.JFrame {
+    
+    private NewClientController controller = new NewClientController();
 
     /**
      * Creates new form NewClientWindow
@@ -37,22 +41,32 @@ public class NewClientWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("nome");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("endereço");
 
-        jTextField3.setText("jTextField3");
+        jTextField3.setText("telefone");
 
-        jTextField4.setText("jTextField4");
+        jTextField4.setText("cep");
 
-        jTextField5.setText("jTextField5");
+        jTextField5.setText("email");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Inserir novo cliente");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("salvar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +117,17 @@ public class NewClientWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        controller.insert(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.parseInt(jTextField4.getText()), jTextField5.getText());
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

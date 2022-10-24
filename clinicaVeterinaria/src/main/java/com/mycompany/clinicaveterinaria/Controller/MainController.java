@@ -39,37 +39,37 @@ public class MainController {
         switch (tableModel) {
             case "appointment":
                 MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
-                String[] appointColumns = {"date", "historic", "id_animal", "id_vet", "id_tratamento"};
+                String[] appointColumns = {"data", "histórico", "id do animal", "id do veterinário", "id do tratamento"};
                 return new AppointmentTableModel(appointDB.getAllAppointments(), appointColumns);
                 
             case "client":
                 ClientDAO clientDB = new ClientDAO();
-                String[] clientColumns = {"name", "address", "cep", "email", "number"};
+                String[] clientColumns = {"nome", "endereço", "cep", "email", "telefone"};
                 return new ClientTableModel(clientDB.getAllUsers(), clientColumns);
                 
             case "animal":            
                 AnimalDAO animalDB = new AnimalDAO();
-                String[] animalColumns = {"name", "genre", "species_id", "client_id"};
+                String[] animalColumns = {"nome", "genero", "id da espécie", "id do cliente"};
                 return new AnimalTableModel(animalDB.getAllAnimals(), animalColumns);
 
             case "veterinary":
                 VeterinaryDAO vetDB = new VeterinaryDAO();
-                String[] vetColumns = {"name", "genre", "species_id", "client_id"};
+                String[] vetColumns = {"nome", "endereço", "id da espécie", "id do cliente"};
                 return new VeterinaryTableModel(vetDB.getAllVeterinaries(), vetColumns);
                 
             case "species":
                 SpeciesDAO speciesDB = new SpeciesDAO();
-                String[] speciesColumns = {"id", "name"};
+                String[] speciesColumns = {"id", "nome"};
                 return new SpeciesTableModel(speciesDB.getAllSpecies(), speciesColumns);
                 
             case "exam":
                 ExamDAO examDB = new ExamDAO();
-                String[] examColumns = {"description", "appointment_id"};
+                String[] examColumns = {"descrição", "id da consulta"};
                 return new ExamTableModel(examDB.getAllExams(), examColumns);
                 
             case "treatment":
                 TreatmentDAO treatmentDB = new TreatmentDAO();
-                String[] treatmentColumns = {"id_animal", "initDate", "finishDate"};
+                String[] treatmentColumns = {"id do animal", "data de início", "data de fim"};
                 return new TreatmentTableModel(treatmentDB.getAllTreatments(), treatmentColumns);
                 
             default:
