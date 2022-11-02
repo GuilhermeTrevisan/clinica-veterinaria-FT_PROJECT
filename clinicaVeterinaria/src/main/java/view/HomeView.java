@@ -68,6 +68,16 @@ public class HomeView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTable1FocusGained(evt);
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         buttonGroup1.add(jRadioButton1);
@@ -229,6 +239,21 @@ public class HomeView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         controller.openCreateViewFor(viewSelected);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        if(viewSelected.equals("client")) {
+            int row= jTable1.getSelectedRow();
+            int column = jTable1.getSelectedColumn();
+            int idCliente = (int) jTable1.getValueAt(row, column);
+            
+            this.jTable1.setModel(controller.getTableModelOf(idCliente));
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
+        this.jTable1.setModel(controller.getTableModelOf(viewSelected));
+    }//GEN-LAST:event_jTable1FocusGained
 
     /**
      * @param args the command line arguments

@@ -16,7 +16,8 @@ public class Client {
     private long cep;
     private String email;
 
-    public Client(String name, String address, String number, long cep, String email) {
+    public Client(int id, String name, String address, String number, long cep, String email) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.number = number;

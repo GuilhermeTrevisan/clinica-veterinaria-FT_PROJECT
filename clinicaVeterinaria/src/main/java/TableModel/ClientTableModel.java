@@ -104,14 +104,16 @@ public class ClientTableModel extends AbstractTableModel {
         Client client = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return client.getName();
+                return client.getId();
             case 1:
-                return client.getAddress();
+                return client.getName();
             case 2:
-                return client.getCep();
+                return client.getAddress();
             case 3:
-                return client.getEmail();
+                return client.getCep();
             case 4:
+                return client.getEmail();
+            case 5:
                 return client.getNumber();
             default:
                 return new Object();

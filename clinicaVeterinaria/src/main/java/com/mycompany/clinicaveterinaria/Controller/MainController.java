@@ -44,7 +44,7 @@ public class MainController {
                 
             case "client":
                 ClientDAO clientDB = new ClientDAO();
-                String[] clientColumns = {"nome", "endereço", "cep", "email", "telefone"};
+                String[] clientColumns = {"id", "nome", "endereço", "cep", "email", "telefone"};
                 return new ClientTableModel(clientDB.getAllUsers(), clientColumns);
                 
             case "animal":            
@@ -59,7 +59,7 @@ public class MainController {
                 
             case "species":
                 SpeciesDAO speciesDB = new SpeciesDAO();
-                String[] speciesColumns = {"id", "nome"};
+                String[] speciesColumns = {"nome", "id"};
                 return new SpeciesTableModel(speciesDB.getAllSpecies(), speciesColumns);
                 
             case "exam":
@@ -75,6 +75,12 @@ public class MainController {
             default:
                 return new EmptyTableModel();
         }
+    }
+    
+    public AbstractTableModel getTableModelOf(int clientId) {
+        AnimalDAO client_animalDB = new AnimalDAO();
+        String[] client_animalColumns = {"nome", "genero", "id da espécie", "id do cliente"};
+        return new AnimalTableModel(client_animalDB.getAnimalByClientId(clientId), client_animalColumns);
     }
     
     public void openCreateViewFor(String section) {

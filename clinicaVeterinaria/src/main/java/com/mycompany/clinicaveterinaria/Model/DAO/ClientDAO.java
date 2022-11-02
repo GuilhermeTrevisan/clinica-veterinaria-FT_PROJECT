@@ -35,7 +35,7 @@ public class ClientDAO extends DAO {
 
         Client cliente = null;
         try {
-            cliente = new Client(rs.getString("name"), rs.getString("address"), rs.getString("number"), Long.parseLong(rs.getString("cep")), rs.getString("email"));
+            cliente = new Client(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("number"), Long.parseLong(rs.getString("cep")), rs.getString("email"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -87,7 +87,7 @@ public class ClientDAO extends DAO {
     private Client buildObject(ResultSet rs) {
         Client cliente = null;
         try {
-            cliente = new Client(rs.getString("name"), rs.getString("address"), rs.getString("number"), rs.getLong("cep"), rs.getString("email"));
+            cliente = new Client(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("number"), Long.parseLong(rs.getString("cep")), rs.getString("email"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

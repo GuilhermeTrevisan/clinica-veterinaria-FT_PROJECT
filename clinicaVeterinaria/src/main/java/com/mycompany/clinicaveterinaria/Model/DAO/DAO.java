@@ -70,7 +70,7 @@ public abstract class DAO {
             PreparedStatement stmt;
             // Client:
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS client( \n"
-                    + "id INTEGER PRIMARY KEY, \n"
+                    + "id INTEGER IDENTITY PRIMARY KEY, \n"
                     + "name VARCHAR, \n"
                     + "address VARCHAR, \n"
                     + "cep VARCHAR, \n"
