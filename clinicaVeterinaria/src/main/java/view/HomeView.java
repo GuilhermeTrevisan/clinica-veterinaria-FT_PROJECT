@@ -244,15 +244,14 @@ public class HomeView extends javax.swing.JFrame {
 
         if(viewSelected.equals("client")) {
             int row= jTable1.getSelectedRow();
-            int column = jTable1.getSelectedColumn();
-            int idCliente = (int) jTable1.getValueAt(row, column);
+            int idCliente = (int) jTable1.getValueAt(row, 0);
             
             this.jTable1.setModel(controller.getTableModelOf(idCliente));
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
-        this.jTable1.setModel(controller.getTableModelOf(viewSelected));
+
     }//GEN-LAST:event_jTable1FocusGained
 
     /**
