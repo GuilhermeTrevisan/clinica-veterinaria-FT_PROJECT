@@ -54,7 +54,7 @@ public class MainController {
 
             case "veterinary":
                 VeterinaryDAO vetDB = new VeterinaryDAO();
-                String[] vetColumns = {"nome", "endereço", "id da espécie", "id do cliente"};
+                String[] vetColumns = {"nome", "endereço", "number"};
                 return new VeterinaryTableModel(vetDB.getAllVeterinaries(), vetColumns);
                 
             case "species":

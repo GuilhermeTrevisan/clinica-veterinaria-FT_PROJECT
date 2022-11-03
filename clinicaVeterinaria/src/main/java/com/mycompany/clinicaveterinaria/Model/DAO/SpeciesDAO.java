@@ -44,7 +44,7 @@ public class SpeciesDAO extends DAO {
 
         Species species = null;
         try {
-            species = new Species(rs.getString("name"));
+            species = new Species(rs.getInt("id"), rs.getString("name"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -88,7 +88,7 @@ public class SpeciesDAO extends DAO {
     private Species buildObject(ResultSet rs) {
         Species species = null;
         try {
-            species = new Species(rs.getString("name"));
+            species = new Species(rs.getInt("id"), rs.getString("name"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
