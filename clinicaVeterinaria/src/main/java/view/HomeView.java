@@ -4,15 +4,23 @@
  */
 package view;
 import com.mycompany.clinicaveterinaria.Controller.MainController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author g170959
  */
-public class HomeView extends javax.swing.JFrame {
+public class HomeView extends javax.swing.JFrame implements ActionListener {
 
     MainController controller = new MainController();
     String viewSelected = "appointment";
+    
+    private JPopupMenu popupMenu;
+    private JMenuItem delete;
     
     /**
      * Creates new form NewJFrame
@@ -242,7 +250,25 @@ public class HomeView extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        if(viewSelected.equals("client")) {
+        if(SwingUtilities.isRightMouseButton(evt) == true) {
+            
+        int row = jTable1.rowAtPoint(evt.getPoint());
+
+        jTable1.clearSelection();
+        jTable1.addRowSelectionInterval(row,row);
+        
+        // constructs the popup menu
+        popupMenu = new JPopupMenu();
+        delete = new JMenuItem("Delete");
+         
+        delete.addActionListener(this);
+         
+        popupMenu.add(delete);
+         
+        // sets the popup menu for the table
+        jTable1.setComponentPopupMenu(popupMenu);
+        
+        } else if(viewSelected.equals("client")) {
             int row= jTable1.getSelectedRow();
             int idCliente = (int) jTable1.getValueAt(row, 0);
             
@@ -313,4 +339,15 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(viewSelected.equals("client")) {
+            int row = jTable1.getSelectedRow();
+            int id = (int) jTable1.getValueAt(row, 0);
+            
+            controller.delete(viewSelected, id);
+            this.jTable1.setModel(controller.getTableModelOf(viewSelected));
+        }
+    }
 }

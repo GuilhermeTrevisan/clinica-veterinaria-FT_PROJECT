@@ -124,4 +124,46 @@ public class MainController {
                 // open screen
         }
     }
+    
+    public void delete(String section, int id) {
+        switch (section) {
+            case "appointment":
+                MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
+                appointDB.deleteAppointmentById(id);
+                break;
+                
+            case "client":
+                ClientDAO clientDB = new ClientDAO();
+                clientDB.deleteClientById(id);
+                break;
+                
+            case "animal":            
+                AnimalDAO animalDB = new AnimalDAO();
+                animalDB.deleteAnimalById(id);
+                break;
+
+            case "veterinary":
+                VeterinaryDAO vetDB = new VeterinaryDAO();
+                vetDB.deleteVeterinaryById(id);
+                break;
+                
+            case "species":
+                SpeciesDAO speciesDB = new SpeciesDAO();
+                speciesDB.deleteSpeciesById(id);
+                break;
+                
+            case "exam":
+                ExamDAO examDB = new ExamDAO();
+                examDB.deleteExamById(id);
+                break;
+                
+            case "treatment":
+                TreatmentDAO treatmentDB = new TreatmentDAO();
+                treatmentDB.deleteTreatmentById(id);
+                break;
+                
+            default:
+                return;
+        }
+    }
 }
