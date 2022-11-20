@@ -46,7 +46,7 @@ public class MedicalAppointmentDAO extends DAO {
 
         MedicalAppointment appoint = null;
         try {
-            appoint = new MedicalAppointment(rs.getString("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
+            appoint = new MedicalAppointment(rs.getInt("id"), rs.getString("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -98,7 +98,7 @@ public class MedicalAppointmentDAO extends DAO {
     private MedicalAppointment buildObject(ResultSet rs) {
         MedicalAppointment appoint = null;
         try {
-            appoint = new MedicalAppointment(rs.getString("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
+            appoint = new MedicalAppointment(rs.getInt("id"), rs.getString("date"), rs.getString("historic"), rs.getInt("id_animal"), rs.getInt("id_vet"), rs.getInt("id_tratamento"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

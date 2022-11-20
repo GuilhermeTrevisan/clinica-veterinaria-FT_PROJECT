@@ -103,8 +103,10 @@ public class ExamTableModel extends AbstractTableModel {
         Exam exam = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return exam.getDescription();
+                return exam.getId();
             case 1:
+                return exam.getDescription();
+            case 2:
                 return exam.getAppointmentId();
             default:
                 return new Object();

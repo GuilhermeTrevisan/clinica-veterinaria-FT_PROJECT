@@ -14,7 +14,8 @@ public class Treatment {
     private String finishDate;
     private int animalId;
 
-    public Treatment(String startDate, String finishDate, int animalId) {
+    public Treatment(int id, String startDate, String finishDate, int animalId) {
+        this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.animalId = animalId;

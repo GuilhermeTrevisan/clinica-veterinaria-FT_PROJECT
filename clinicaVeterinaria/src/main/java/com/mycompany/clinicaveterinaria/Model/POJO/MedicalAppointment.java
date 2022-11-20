@@ -16,7 +16,8 @@ public class MedicalAppointment {
     private int veterinaryId;
     private int treatmentId;
 
-    public MedicalAppointment(String date, String historic, int animalId, int veterinaryId, int treatmentId) {
+    public MedicalAppointment(int id, String date, String historic, int animalId, int veterinaryId, int treatmentId) {
+        this.id = id;
         this.date = date;
         this.historic = historic;
         this.animalId = animalId;

@@ -39,7 +39,7 @@ public class MainController {
         switch (tableModel) {
             case "appointment":
                 MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
-                String[] appointColumns = {"data", "histórico", "id do animal", "id do veterinário", "id do tratamento"};
+                String[] appointColumns = {"id", "data", "histórico", "id do animal", "id do veterinário", "id do tratamento"};
                 return new AppointmentTableModel(appointDB.getAllAppointments(), appointColumns);
                 
             case "client":
@@ -49,27 +49,27 @@ public class MainController {
                 
             case "animal":            
                 AnimalDAO animalDB = new AnimalDAO();
-                String[] animalColumns = {"nome", "genero", "id da espécie", "id do cliente"};
+                String[] animalColumns = {"id", "nome", "genero", "id da espécie", "id do cliente"};
                 return new AnimalTableModel(animalDB.getAllAnimals(), animalColumns);
 
             case "veterinary":
                 VeterinaryDAO vetDB = new VeterinaryDAO();
-                String[] vetColumns = {"nome", "endereço", "number"};
+                String[] vetColumns = {"id", "nome", "endereço", "number"};
                 return new VeterinaryTableModel(vetDB.getAllVeterinaries(), vetColumns);
                 
             case "species":
                 SpeciesDAO speciesDB = new SpeciesDAO();
-                String[] speciesColumns = {"nome", "id"};
+                String[] speciesColumns = {"id", "nome"};
                 return new SpeciesTableModel(speciesDB.getAllSpecies(), speciesColumns);
                 
             case "exam":
                 ExamDAO examDB = new ExamDAO();
-                String[] examColumns = {"descrição", "id da consulta"};
+                String[] examColumns = {"id", "descrição", "id da consulta"};
                 return new ExamTableModel(examDB.getAllExams(), examColumns);
                 
             case "treatment":
                 TreatmentDAO treatmentDB = new TreatmentDAO();
-                String[] treatmentColumns = {"id do animal", "data de início", "data de fim"};
+                String[] treatmentColumns = {"id", "id do animal", "data de início", "data de fim"};
                 return new TreatmentTableModel(treatmentDB.getAllTreatments(), treatmentColumns);
                 
             default:

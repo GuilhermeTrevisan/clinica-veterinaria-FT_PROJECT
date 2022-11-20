@@ -104,12 +104,14 @@ public class AnimalTableModel extends AbstractTableModel {
         Animal animal = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return animal.getName();
+                return animal.getId();
             case 1:
-                return animal.getGenre();
+                return animal.getName();
             case 2:
-                return animal.getSpeciesId();
+                return animal.getGenre();
             case 3:
+                return animal.getSpeciesId();
+            case 4:
                 return animal.getClientId();
             default:
                 return new Object();

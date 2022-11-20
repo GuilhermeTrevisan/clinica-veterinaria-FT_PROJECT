@@ -14,7 +14,8 @@ public class Veterinary {
     private String address;
     private String number;
 
-    public Veterinary(String name, String address, String number) {
+    public Veterinary(int id, String name, String address, String number) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.number = number;

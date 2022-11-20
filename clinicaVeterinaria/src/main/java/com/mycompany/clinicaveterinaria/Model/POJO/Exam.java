@@ -13,7 +13,8 @@ public class Exam {
     private int appointmentId;
     private String description;
 
-    public Exam(String description, int appointmentId) {
+    public Exam(int id, String description, int appointmentId) {
+        this.id = id;
         this.description = description;
         this.appointmentId = appointmentId;
     }

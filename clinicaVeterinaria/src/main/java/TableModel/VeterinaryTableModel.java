@@ -103,10 +103,12 @@ public class VeterinaryTableModel extends AbstractTableModel {
         Veterinary vet = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return vet.getName();
+                return vet.getId();
             case 1:
-                return vet.getAddress();
+                return vet.getName();
             case 2:
+                return vet.getAddress();
+            case 3:
                 return vet.getNumber();
             default:
                 return new Object();

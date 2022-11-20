@@ -103,10 +103,12 @@ public class TreatmentTableModel extends AbstractTableModel {
         Treatment treatment = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return treatment.getAnimalId();
+                return treatment.getId();
             case 1:
-                return treatment.getStartDate();
+                return treatment.getAnimalId();
             case 2:
+                return treatment.getStartDate();
+            case 3:
                 return treatment.getFinishDate();
             default:
                 return new Object();

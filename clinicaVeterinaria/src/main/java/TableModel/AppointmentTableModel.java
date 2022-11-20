@@ -104,14 +104,16 @@ public class AppointmentTableModel extends AbstractTableModel {
         MedicalAppointment appoint = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return appoint.getDate();
+                return appoint.getId();
             case 1:
-                return appoint.getHistoric();
+                return appoint.getDate();
             case 2:
-                return appoint.getAnimalId();
+                return appoint.getHistoric();
             case 3:
-                return appoint.getVeterinaryId();
+                return appoint.getAnimalId();
             case 4:
+                return appoint.getVeterinaryId();
+            case 5:
                 return appoint.getTreatment_id();
             default:
                 return new Object();

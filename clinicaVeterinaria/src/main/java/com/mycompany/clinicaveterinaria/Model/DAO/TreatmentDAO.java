@@ -44,7 +44,7 @@ public class TreatmentDAO extends DAO {
 
         Treatment treatment = null;
         try {
-            treatment = new Treatment(rs.getString("initDate"), rs.getString("finishDate"), rs.getInt("id_animal"));
+            treatment = new Treatment(rs.getInt("id"), rs.getString("initDate"), rs.getString("finishDate"), rs.getInt("id_animal"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -92,7 +92,7 @@ public class TreatmentDAO extends DAO {
     private Treatment buildObject(ResultSet rs) {
         Treatment treatment = null;
         try {
-            treatment = new Treatment(rs.getString("initDate"), rs.getString("finishDate"), rs.getInt("id_animal"));
+            treatment = new Treatment(rs.getInt("id"), rs.getString("initDate"), rs.getString("finishDate"), rs.getInt("id_animal"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

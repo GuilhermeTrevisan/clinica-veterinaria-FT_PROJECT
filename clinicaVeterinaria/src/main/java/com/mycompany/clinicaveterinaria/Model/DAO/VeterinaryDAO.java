@@ -45,7 +45,7 @@ public class VeterinaryDAO extends DAO {
 
         Veterinary veterinary = null;
         try {
-            veterinary = new Veterinary(rs.getString("name"), rs.getString("address"), rs.getString("number"));
+            veterinary = new Veterinary(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("number"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -93,7 +93,7 @@ public class VeterinaryDAO extends DAO {
     private Veterinary buildObject(ResultSet rs) {
         Veterinary veterinary = null;
         try {
-            veterinary = new Veterinary(rs.getString("name"), rs.getString("address"), rs.getString("number"));
+            veterinary = new Veterinary(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("number"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

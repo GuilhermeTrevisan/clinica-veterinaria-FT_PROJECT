@@ -103,9 +103,9 @@ public class SpeciesTableModel extends AbstractTableModel {
         Species species = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return species.getName();
-            case 1:
                 return species.getId();
+            case 1:
+                return species.getName();
             default:
                 return new Object();
         }

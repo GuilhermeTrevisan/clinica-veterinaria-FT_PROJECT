@@ -45,7 +45,7 @@ public class ExamDAO extends DAO {
 
         Exam exam = null;
         try {
-            exam = new Exam(rs.getString("description"), rs.getInt("appointment_id"));
+            exam = new Exam(rs.getInt("id"), rs.getString("description"), rs.getInt("appointment_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -91,7 +91,7 @@ public class ExamDAO extends DAO {
     private Exam buildObject(ResultSet rs) {
         Exam exam = null;
         try {
-            exam = new Exam(rs.getString("description"), rs.getInt("appointment_id"));
+            exam = new Exam(rs.getInt("id"), rs.getString("description"), rs.getInt("appointment_id"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }

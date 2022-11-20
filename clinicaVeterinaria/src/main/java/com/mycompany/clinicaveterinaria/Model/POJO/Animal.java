@@ -16,7 +16,8 @@ public class Animal {
     private String name;
     private String genre;
 
-    public Animal(String name, String genre, int clientId, int speciesId) {
+    public Animal(int String, String name, String genre, int clientId, int speciesId) {
+        this.id = id;
         this.name = name;
         this.genre = genre;
         this.clientId = clientId;

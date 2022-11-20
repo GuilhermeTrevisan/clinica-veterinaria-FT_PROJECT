@@ -4,6 +4,7 @@
  */
 package view;
 import com.mycompany.clinicaveterinaria.Controller.MainController;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
@@ -18,6 +19,8 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
 
     MainController controller = new MainController();
     String viewSelected = "appointment";
+    
+    private Boolean deleting = false;
     
     private JPopupMenu popupMenu;
     private JMenuItem delete;
@@ -63,7 +66,12 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
 
         jButton4.setText("jButton4");
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Deletar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -250,26 +258,22 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        if(SwingUtilities.isRightMouseButton(evt) == true) {
+        System.out.println(deleting);
+        if(deleting) {
             
-        int row = jTable1.rowAtPoint(evt.getPoint());
-
-        jTable1.clearSelection();
-        jTable1.addRowSelectionInterval(row,row);
-        
-        // constructs the popup menu
-        popupMenu = new JPopupMenu();
-        delete = new JMenuItem("Delete");
-         
-        delete.addActionListener(this);
-         
-        popupMenu.add(delete);
-         
-        // sets the popup menu for the table
-        jTable1.setComponentPopupMenu(popupMenu);
+            int row = jTable1.getSelectedRow();
+            int id = (int) jTable1.getValueAt(row, 0);
+            
+            System.out.println(id);
+            
+            controller.delete(viewSelected, id);
+            
+            jButton2.setBackground(Color.LIGHT_GRAY);
+            
+            this.jTable1.setModel(controller.getTableModelOf(viewSelected));
         
         } else if(viewSelected.equals("client")) {
-            int row= jTable1.getSelectedRow();
+            int row = jTable1.getSelectedRow();
             int idCliente = (int) jTable1.getValueAt(row, 0);
             
             this.jTable1.setModel(controller.getTableModelOf(idCliente));
@@ -279,6 +283,11 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
 
     }//GEN-LAST:event_jTable1FocusGained
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jButton2.setBackground(Color.red);
+        deleting = true;
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
