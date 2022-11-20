@@ -4,6 +4,7 @@
  */
 package view;
 
+import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
 
 /**
@@ -12,12 +13,15 @@ import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
  */
 public class NewAppointWindow extends javax.swing.JFrame {
     
-    private MedicalAppointmentDAO controller = new MedicalAppointmentDAO();
+    private final MedicalAppointmentDAO controller = new MedicalAppointmentDAO();
+    private final UpdateScreenInterface screenUpdater;
 
     /**
      * Creates new form NewAppointWindow
+     * @param screenUpdater
      */
-    public NewAppointWindow() {
+    public NewAppointWindow(UpdateScreenInterface screenUpdater) {
+        this.screenUpdater = screenUpdater;
         initComponents();
     }
 
@@ -136,6 +140,7 @@ public class NewAppointWindow extends javax.swing.JFrame {
         controller.insertNewAppointment(jTextField1.getText(), jTextField2.getText(), Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField4.getText()), Integer.parseInt(jTextField4.getText()));
         setVisible(false);
         dispose();
+        screenUpdater.reloadScreen();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -168,7 +173,8 @@ public class NewAppointWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewAppointWindow().setVisible(true);
+                UpdateScreenInterface updater = () -> {};
+                new NewAppointWindow(updater).setVisible(true);
             }
         });
     }

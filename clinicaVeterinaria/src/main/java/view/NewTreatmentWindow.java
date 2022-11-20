@@ -5,6 +5,7 @@
 package view;
 
 import com.mycompany.clinicaveterinaria.Controller.NewTreatmentController;
+import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 
 /**
  *
@@ -12,12 +13,14 @@ import com.mycompany.clinicaveterinaria.Controller.NewTreatmentController;
  */
 public class NewTreatmentWindow extends javax.swing.JFrame {
     
-    private NewTreatmentController controller = new NewTreatmentController();
+    private final NewTreatmentController controller = new NewTreatmentController();
+    private final UpdateScreenInterface screenUpdater;
 
     /**
      * Creates new form NewTreatmentWindow
      */
-    public NewTreatmentWindow() {
+    public NewTreatmentWindow(UpdateScreenInterface screenUpdater) {
+        this.screenUpdater = screenUpdater;
         initComponents();
     }
 
@@ -114,6 +117,7 @@ public class NewTreatmentWindow extends javax.swing.JFrame {
         controller.insert(jTextField1.getText(), jTextField2.getText(), Integer.parseInt(jTextField3.getText()));
         setVisible(false);
         dispose();
+        screenUpdater.reloadScreen();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -146,7 +150,8 @@ public class NewTreatmentWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewTreatmentWindow().setVisible(true);
+                UpdateScreenInterface updater = () -> {};
+                new NewAppointWindow(updater).setVisible(true);
             }
         });
     }

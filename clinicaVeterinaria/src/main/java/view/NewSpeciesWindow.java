@@ -5,6 +5,7 @@
 package view;
 
 import com.mycompany.clinicaveterinaria.Controller.NewSpeciesController;
+import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 
 /**
  *
@@ -12,12 +13,14 @@ import com.mycompany.clinicaveterinaria.Controller.NewSpeciesController;
  */
 public class NewSpeciesWindow extends javax.swing.JFrame {
     
-    private NewSpeciesController controller = new NewSpeciesController();
+    private final NewSpeciesController controller = new NewSpeciesController();
+    private final UpdateScreenInterface screenUpdater;
 
     /**
      * Creates new form NewSpeciesWindow
      */
-    public NewSpeciesWindow() {
+    public NewSpeciesWindow(UpdateScreenInterface screenUpdater) {
+        this.screenUpdater = screenUpdater;
         initComponents();
     }
 
@@ -101,6 +104,7 @@ public class NewSpeciesWindow extends javax.swing.JFrame {
         controller.insert(jTextField1.getText());
         setVisible(false);
         dispose();
+        screenUpdater.reloadScreen();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -133,7 +137,8 @@ public class NewSpeciesWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewSpeciesWindow().setVisible(true);
+                UpdateScreenInterface updater = () -> {};
+                new NewSpeciesWindow(updater).setVisible(true);
             }
         });
     }

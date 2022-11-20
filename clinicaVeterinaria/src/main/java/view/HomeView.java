@@ -4,12 +4,10 @@
  */
 package view;
 import com.mycompany.clinicaveterinaria.Controller.MainController;
+import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -21,9 +19,7 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     String viewSelected = "appointment";
     
     private Boolean deleting = false;
-    
-    private JPopupMenu popupMenu;
-    private JMenuItem delete;
+    private UpdateScreenInterface screenUpdater = () -> { this.jTable1.setModel(controller.getTableModelOf(viewSelected)); };
     
     /**
      * Creates new form NewJFrame
@@ -253,7 +249,7 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jRadioButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.openCreateViewFor(viewSelected);
+        controller.openCreateViewFor(viewSelected, screenUpdater);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

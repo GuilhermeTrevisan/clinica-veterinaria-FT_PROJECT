@@ -83,40 +83,40 @@ public class MainController {
         return new AnimalTableModel(client_animalDB.getAnimalByClientId(clientId), client_animalColumns);
     }
     
-    public void openCreateViewFor(String section) {
+    public void openCreateViewFor(String section, UpdateScreenInterface screenUpdater) {
         switch (section) {
             case "appointment":
-                NewAppointWindow appointFrame = new NewAppointWindow();
+                NewAppointWindow appointFrame = new NewAppointWindow(screenUpdater);
                 appointFrame.setVisible(true);
                 break;
                 
             case "client":
-                NewClientWindow clientFrame = new NewClientWindow();
+                NewClientWindow clientFrame = new NewClientWindow(screenUpdater);
                 clientFrame.setVisible(true);
                 break;
                 
             case "animal":         
-                NewAnimalWindow animalFrame = new NewAnimalWindow();
+                NewAnimalWindow animalFrame = new NewAnimalWindow(screenUpdater);
                 animalFrame.setVisible(true);
                 break;
 
             case "veterinary":
-                NewVetWindow vetFrame = new NewVetWindow();
+                NewVetWindow vetFrame = new NewVetWindow(screenUpdater);
                 vetFrame.setVisible(true);
                 break;
                 
             case "species":
-                NewSpeciesWindow speciesFrame = new NewSpeciesWindow();
+                NewSpeciesWindow speciesFrame = new NewSpeciesWindow(screenUpdater);
                 speciesFrame.setVisible(true);
                 break;
                 
             case "exam":
-                NewExamWindow examFrame = new NewExamWindow();
+                NewExamWindow examFrame = new NewExamWindow(screenUpdater);
                 examFrame.setVisible(true);
                 break;
                 
             case "treatment":
-                NewTreatmentWindow treatmentFrame = new NewTreatmentWindow();
+                NewTreatmentWindow treatmentFrame = new NewTreatmentWindow(screenUpdater);
                 treatmentFrame.setVisible(true);
                 break;
                 
