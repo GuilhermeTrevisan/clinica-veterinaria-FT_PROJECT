@@ -281,8 +281,8 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jTable1FocusGained
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jButton2.setBackground(Color.red);
-        deleting = true;
+        jButton2.setBackground(jButton2.getBackground() == Color.red ? Color.LIGHT_GRAY : Color.red);
+        deleting = !deleting;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
