@@ -4,8 +4,10 @@
  */
 package view;
 
+import Helper.RegexTest;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
+import java.awt.Color;
 
 /**
  *
@@ -15,6 +17,7 @@ public class NewAppointWindow extends javax.swing.JFrame {
     
     private final MedicalAppointmentDAO controller = new MedicalAppointmentDAO();
     private final UpdateScreenInterface screenUpdater;
+    private final RegexTest textValidator = new RegexTest();
 
     /**
      * Creates new form NewAppointWindow
@@ -46,7 +49,12 @@ public class NewAppointWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("data");
+        jTextField1.setText("data (dd/mm/aaaa)");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setText("histórico");
 
@@ -137,11 +145,25 @@ public class NewAppointWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String text = jTextField1.getText();
+        
+        System.out.println(text);
+        System.out.println(textValidator.validate(text));
+        
+        if(!textValidator.validate(text)) {
+            jTextField1.setBackground(Color.red);
+            return;
+        }
+        
         controller.insertNewAppointment(jTextField1.getText(), jTextField2.getText(), Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField4.getText()), Integer.parseInt(jTextField4.getText()));
         setVisible(false);
         dispose();
         screenUpdater.reloadScreen();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
