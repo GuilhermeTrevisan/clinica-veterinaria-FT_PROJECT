@@ -134,7 +134,9 @@ public class MainController {
                 
             case "client":
                 ClientDAO clientDB = new ClientDAO();
+                AnimalDAO animal_clientDAO = new AnimalDAO();
                 clientDB.deleteClientById(id);
+                animal_clientDAO.deleteAnimalByClientId(id);
                 break;
                 
             case "animal":            

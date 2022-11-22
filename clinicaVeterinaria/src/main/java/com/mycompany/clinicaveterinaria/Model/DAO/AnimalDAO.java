@@ -95,6 +95,17 @@ public class AnimalDAO extends DAO {
             System.err.println("Exception: " + e.getMessage());
         }
     }
+    
+    public void deleteAnimalByClientId(int id) {
+        PreparedStatement stmt;
+        try {
+            stmt = DAO.getConnection().prepareStatement("DELETE FROM animal WHERE client_id = ?");
+            stmt.setInt(1, id);
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
 
     public List<Animal> getAnimalOfUser(int clientId) {
         String query = "SELECT * FROM animal WHERE client_id = " + clientId;
