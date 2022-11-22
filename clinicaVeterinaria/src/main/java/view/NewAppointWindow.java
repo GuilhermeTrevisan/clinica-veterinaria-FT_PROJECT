@@ -147,9 +147,6 @@ public class NewAppointWindow extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String text = jTextField1.getText();
         
-        System.out.println(text);
-        System.out.println(textValidator.validate(text));
-        
         if(!textValidator.validate(text)) {
             jTextField1.setBackground(Color.red);
             return;
