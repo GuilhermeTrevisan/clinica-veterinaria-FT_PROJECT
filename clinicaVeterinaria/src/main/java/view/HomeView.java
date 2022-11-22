@@ -254,17 +254,12 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        System.out.println(deleting);
         if(deleting) {
             
             int row = jTable1.getSelectedRow();
             int id = (int) jTable1.getValueAt(row, 0);
             
-            System.out.println(id);
-            
             controller.delete(viewSelected, id);
-            
-            jButton2.setBackground(Color.LIGHT_GRAY);
             
             this.jTable1.setModel(controller.getTableModelOf(viewSelected));
         
