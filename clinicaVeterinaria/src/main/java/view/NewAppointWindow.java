@@ -6,7 +6,10 @@ package view;
 
 import Helper.RegexTest;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
+import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
 import java.awt.Color;
 
 /**
@@ -16,6 +19,9 @@ import java.awt.Color;
 public class NewAppointWindow extends javax.swing.JFrame {
     
     private final MedicalAppointmentDAO controller = new MedicalAppointmentDAO();
+    private final AnimalDAO animalController = new AnimalDAO();
+    private final VeterinaryDAO vetController = new VeterinaryDAO();
+    private final TreatmentDAO treatmentController = new TreatmentDAO();
     private final UpdateScreenInterface screenUpdater;
     private final RegexTest textValidator = new RegexTest();
 
@@ -59,10 +65,27 @@ public class NewAppointWindow extends javax.swing.JFrame {
         jTextField2.setText("histórico");
 
         jTextField3.setText("animal");
+        jTextField3.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextField3InputMethodTextChanged(evt);
+            }
+        });
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
 
         jTextField4.setText("veterinário");
 
-        jTextField5.setText("tratamento");
+        jTextField5.setText("tratamento (vazio caso não exista)");
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +124,7 @@ public class NewAppointWindow extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addGap(26, 26, 26)))
                     .addComponent(jLabel1))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +175,25 @@ public class NewAppointWindow extends javax.swing.JFrame {
             return;
         }
         
-        controller.insertNewAppointment(jTextField1.getText(), jTextField2.getText(), Integer.parseInt(jTextField3.getText()), Integer.parseInt(jTextField4.getText()), Integer.parseInt(jTextField4.getText()));
+        if(!this.animalController.getAllAnimalsName().contains(jTextField3.getText())) {
+            this.jTextField3.setBackground(Color.red);
+            this.jTextField3.setText("Animal não encontrado, verifique o nome");
+            return;
+        }
+        
+        if(!this.vetController.getAllVeterinariesName().contains(jTextField4.getText())) {
+            this.jTextField4.setBackground(Color.red);
+            this.jTextField4.setText("Veterinário não encontrado, verifique o nome");
+            return;
+        }
+        
+        if(!this.treatmentController.getAllTreatmentsId().contains(jTextField5.getText()) && jTextField5.getText() != "" && jTextField5.getText() != " ") {
+            this.jTextField5.setBackground(Color.red);
+            this.jTextField5.setText("Tratamento não encontrado, verifique o identificador");
+            return;
+        }
+        
+        controller.insertNewAppointment(jTextField1.getText(), jTextField2.getText(), animalController.getAnimalByName(jTextField3.getText()).getId(), vetController.getVeterinaryByName(jTextField4.getText()).getId(), Integer.parseInt(jTextField5.getText()));
         setVisible(false);
         dispose();
         screenUpdater.reloadScreen();
@@ -161,6 +202,18 @@ public class NewAppointWindow extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField3InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField3InputMethodTextChanged
+        
+    }//GEN-LAST:event_jTextField3InputMethodTextChanged
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+
+    }//GEN-LAST:event_jTextField3KeyTyped
 
     /**
      * @param args the command line arguments

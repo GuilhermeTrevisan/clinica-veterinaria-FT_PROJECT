@@ -29,8 +29,42 @@ public class AnimalDAO extends DAO {
         return animais;
     }
     
+    public List<String> getAllAnimalsName() {
+        List<Animal> animais = new ArrayList();
+        String query = "SELECT * FROM animal";
+        ResultSet rs = getResultSet(query);
+        try {
+            while (rs.next()) {
+                animais.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        
+        List<String> animalsName = new ArrayList();
+        for(int i = 0; i < animais.size(); i++) {
+            animalsName.add(i, animais.get(i).getName());
+        }
+        
+        return animalsName;
+    }
+    
     public Animal getAnimalById(int id) { 
         String query = "SELECT * FROM animal WHERE id = " + id;
+        ResultSet rs = getResultSet(query);
+
+        Animal animal = null;
+        try {
+            animal = new Animal(rs.getInt("id"), rs.getString("name"), rs.getString("genre"), rs.getInt("client_id"), rs.getInt("species_id"));
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return animal;
+    }
+    
+    public Animal getAnimalByName(String name) { 
+        String query = "SELECT * FROM animal WHERE name = '" + name  + "'";
+        System.out.println(query);
         ResultSet rs = getResultSet(query);
 
         Animal animal = null;

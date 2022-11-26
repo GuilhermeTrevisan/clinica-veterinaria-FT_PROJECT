@@ -38,6 +38,26 @@ public class TreatmentDAO extends DAO {
         return treatments;
     }
     
+    public List<String> getAllTreatmentsId() {
+        List<Treatment> treatments = new ArrayList();
+        String query = "SELECT * FROM treatment";
+        ResultSet rs = getResultSet(query);
+        try {
+            while (rs.next()) {
+                treatments.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        
+        List<String> veterinariesName = new ArrayList();
+        for(int i = 0; i < treatments.size(); i++) {
+            veterinariesName.add(i, String.valueOf(treatments.get(i).getId()));
+        }
+        
+        return veterinariesName;
+    }
+    
     public Treatment getTreatmentById(int id) {
         String query = "SELECT * FROM treatment WHERE id = " + id;
         ResultSet rs = getResultSet(query);

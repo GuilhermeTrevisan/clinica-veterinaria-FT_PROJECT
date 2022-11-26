@@ -39,8 +39,41 @@ public class VeterinaryDAO extends DAO {
         return veterinaries;
     }
     
+    public List<String> getAllVeterinariesName() {
+        List<Veterinary> veterinaries = new ArrayList();
+        String query = "SELECT * FROM veterinary";
+        ResultSet rs = getResultSet(query);
+        try {
+            while (rs.next()) {
+                veterinaries.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        
+        List<String> veterinariesName = new ArrayList();
+        for(int i = 0; i < veterinaries.size(); i++) {
+            veterinariesName.add(i, veterinaries.get(i).getName());
+        }
+        
+        return veterinariesName;
+    }
+    
     public Veterinary getVeterinaryById(int id) {
         String query = "SELECT * FROM veterinary WHERE id = " + id;
+        ResultSet rs = getResultSet(query);
+
+        Veterinary veterinary = null;
+        try {
+            veterinary = new Veterinary(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("number"));
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return veterinary;
+    }
+    
+    public Veterinary getVeterinaryByName(String name) {
+        String query = "SELECT * FROM veterinary WHERE name = '" + name  + "'";
         ResultSet rs = getResultSet(query);
 
         Veterinary veterinary = null;

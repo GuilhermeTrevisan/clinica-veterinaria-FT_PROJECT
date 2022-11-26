@@ -19,13 +19,14 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     String viewSelected = "appointment";
     
     private Boolean deleting = false;
-    private UpdateScreenInterface screenUpdater = () -> { this.jTable1.setModel(controller.getTableModelOf(viewSelected)); };
+    private final UpdateScreenInterface screenUpdater = () -> { this.jTable1.setModel(controller.getTableModelOf(viewSelected)); };
     
     /**
      * Creates new form NewJFrame
      */
     public HomeView() {
         initComponents();
+        
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }
 
