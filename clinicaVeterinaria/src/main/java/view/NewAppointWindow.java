@@ -85,7 +85,7 @@ public class NewAppointWindow extends javax.swing.JFrame {
 
         jTextField4.setText("veterinário");
 
-        jTextField5.setText("tratamento (vazio caso não exista)");
+        jTextField5.setText("tratamento (zero caso não exista)");
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +187,7 @@ public class NewAppointWindow extends javax.swing.JFrame {
             return;
         }
         
-        if(!this.treatmentController.getAllTreatmentsId().contains(jTextField5.getText()) && jTextField5.getText() != "" && jTextField5.getText() != " ") {
+        if(!this.treatmentController.getAllTreatmentsId().contains(jTextField5.getText()) && jTextField5.getText() == "0") {
             this.jTextField5.setBackground(Color.red);
             this.jTextField5.setText("Tratamento não encontrado, verifique o identificador");
             return;
