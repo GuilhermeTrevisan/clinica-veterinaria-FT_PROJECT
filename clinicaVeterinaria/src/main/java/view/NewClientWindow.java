@@ -6,6 +6,8 @@ package view;
 
 import com.mycompany.clinicaveterinaria.Controller.NewClientController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
+import java.awt.Color;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -22,6 +24,30 @@ public class NewClientWindow extends javax.swing.JFrame {
     public NewClientWindow(UpdateScreenInterface screenUpdater) {
         this.screenUpdater = screenUpdater;
         initComponents();
+    }
+    
+    private static boolean isEmailValid(String emailAddress) {
+        String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+        return Pattern.compile(regexPattern)
+          .matcher(emailAddress)
+          .matches();
+    }
+    
+    private static boolean isCEPValid(String cep) {
+        String regexPattern = "(^\\d{5}-\\d{3}|^\\d{2}.\\d{3}-\\d{3}|\\d{8})";
+
+        return Pattern.compile(regexPattern)
+          .matcher(cep)
+          .matches();
+    }
+    
+    private static boolean isNumberValid(String number) {
+        String regexPattern = "^\\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
+
+        return Pattern.compile(regexPattern)
+          .matcher(number)
+          .matches();
     }
 
     /**
@@ -127,6 +153,30 @@ public class NewClientWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(!isNumberValid(jTextField3.getText())) {
+            this.jTextField3.setBackground(Color.red);
+            this.jTextField3.setText("Insira um número válido");
+            return;
+        } else {
+            this.jTextField3.setBackground(Color.WHITE);
+        }
+        
+        if(!isCEPValid(jTextField4.getText())) {
+            this.jTextField4.setBackground(Color.red);
+            this.jTextField4.setText("Insira um cep válido");
+            return;
+        } else {
+            this.jTextField4.setBackground(Color.WHITE);
+        }
+        
+        if(!isEmailValid(jTextField5.getText())) {
+            this.jTextField5.setBackground(Color.red);
+            this.jTextField5.setText("Insira um email válido");
+            return;
+        } else {
+            this.jTextField5.setBackground(Color.WHITE);
+        }
+
         controller.insert(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Integer.parseInt(jTextField4.getText()), jTextField5.getText());
         setVisible(false);
         dispose();
