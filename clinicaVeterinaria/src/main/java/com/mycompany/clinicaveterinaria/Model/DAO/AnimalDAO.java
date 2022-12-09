@@ -90,14 +90,14 @@ public class AnimalDAO extends DAO {
         return animais;
     }
     
-    public void insertNewAnimal(String name, String genre, String speciesId, String clientId) {
+    public void insertNewAnimal(String name, String genre, String speciesId, int clientId) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("INSERT INTO animal (name, genre, species_id, client_id) VALUES (?,?,?,?)");
             stmt.setString(1, name);
             stmt.setString(2, genre);
             stmt.setString(3, speciesId);
-            stmt.setString(4, clientId);
+            stmt.setInt(4, clientId);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);

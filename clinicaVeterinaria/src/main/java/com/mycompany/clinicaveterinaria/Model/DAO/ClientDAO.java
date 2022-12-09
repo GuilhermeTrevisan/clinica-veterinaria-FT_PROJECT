@@ -3,6 +3,7 @@ import com.mycompany.clinicaveterinaria.Model.POJO.Client;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,6 +30,41 @@ public class ClientDAO extends DAO {
         return clientes;
     }
     
+    public List<Client> getAllClientsByName(String name) throws ParseException {
+        List<Client> clients = new ArrayList();
+        String query = "SELECT * FROM client WHERE name LIKE '%" + name + "%'";
+        ResultSet rs = getResultSet(query);
+
+        try {
+            while (rs.next()) {
+                clients.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return clients;
+    }
+    
+    public List<String> getAllClientsName() {
+        List<Client> clients = new ArrayList();
+        String query = "SELECT * FROM client";
+        ResultSet rs = getResultSet(query);
+        try {
+            while (rs.next()) {
+                clients.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        
+        List<String> clientNames = new ArrayList();
+        for(int i = 0; i < clients.size(); i++) {
+            clientNames.add(i, clients.get(i).getName());
+        }
+        
+        return clientNames;
+    }
+    
     public Client getUserById(int id) {
         String query = "SELECT * FROM client WHERE id = " + id;
         ResultSet rs = getResultSet(query);
@@ -40,6 +76,20 @@ public class ClientDAO extends DAO {
             System.err.println("Exception: " + e.getMessage());
         }
         return cliente;
+    }
+    
+    public Client getClientByName(String name) { 
+        String query = "SELECT * FROM client WHERE name = '" + name  + "'";
+        System.out.println(query);
+        ResultSet rs = getResultSet(query);
+
+        Client client = null;
+        try {
+            client = new Client(rs.getInt("id"), rs.getString("name"), rs.getString("address"), rs.getString("number"), Long.parseLong(rs.getString("cep")), rs.getString("email"));
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return client;
     }
     
     public void insertNewClient(String name, String address, String number, long cep, String email) {

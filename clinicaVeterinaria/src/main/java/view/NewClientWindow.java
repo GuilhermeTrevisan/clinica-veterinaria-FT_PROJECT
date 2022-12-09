@@ -6,6 +6,7 @@ package view;
 
 import com.mycompany.clinicaveterinaria.Controller.NewClientController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
+import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
 import java.awt.Color;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,7 @@ import java.util.regex.Pattern;
 public class NewClientWindow extends javax.swing.JFrame {
     
     private NewClientController controller = new NewClientController();
+    private final ClientDAO clientController = new ClientDAO();
     private UpdateScreenInterface screenUpdater;
 
     /**
@@ -43,7 +45,7 @@ public class NewClientWindow extends javax.swing.JFrame {
     }
     
     private static boolean isNumberValid(String number) {
-        String regexPattern = "^\\(?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\)? ?(?:[2-8]|9[1-9])[0-9]{3}\\-?[0-9]{4}$";
+        String regexPattern = "/^(?:(?:\\+|00)?(55)\\s?)?(?:(?:\\(?[1-9][0-9]\\)?)?\\s?)?(?:((?:9\\d|[2-9])\\d{3})-?(\\d{4}))$/";
 
         return Pattern.compile(regexPattern)
           .matcher(number)
@@ -71,6 +73,11 @@ public class NewClientWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextField1.setText("nome");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jTextField2.setText("endereço");
 
@@ -153,13 +160,21 @@ public class NewClientWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(!isNumberValid(jTextField3.getText())) {
-            this.jTextField3.setBackground(Color.red);
-            this.jTextField3.setText("Insira um número válido");
+        if(this.clientController.getAllClientsName().contains(jTextField1.getText())) {
+            this.jTextField1.setBackground(Color.red);
+            this.jTextField1.setText("Nome já utlizado");
             return;
         } else {
-            this.jTextField3.setBackground(Color.WHITE);
+            this.jTextField1.setBackground(Color.WHITE);
         }
+        
+//        if(!isNumberValid(jTextField3.getText())) {
+//            this.jTextField3.setBackground(Color.red);
+//            this.jTextField3.setText("Insira um número válido");
+//            return;
+//        } else {
+//            this.jTextField3.setBackground(Color.WHITE);
+//        }
         
         if(!isCEPValid(jTextField4.getText())) {
             this.jTextField4.setBackground(Color.red);
@@ -182,6 +197,10 @@ public class NewClientWindow extends javax.swing.JFrame {
         dispose();
         screenUpdater.reloadScreen();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -20,6 +20,7 @@ import com.mycompany.clinicaveterinaria.Model.DAO.ExamDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.SpeciesDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
+import java.text.ParseException;
 import view.NewAnimalWindow;
 import view.NewAppointWindow;
 import view.NewClientWindow;
@@ -166,6 +167,49 @@ public class MainController {
                 
             default:
                 return;
+        }
+    }
+    
+    public AbstractTableModel search(String section, String text) throws ParseException {
+        switch (section) {
+            case "appointment":
+                MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
+                String[] appointColumns = {"id", "data", "histórico", "id do animal", "id do veterinário", "id do tratamento"};
+                return new AppointmentTableModel(appointDB.getAppointmentByDate(text), appointColumns);
+                
+            case "client":
+                ClientDAO clientDB = new ClientDAO();
+                String[] clientColumns = {"id", "nome", "endereço", "cep", "email", "telefone"};
+                return new ClientTableModel(clientDB.getAllClientsByName(text), clientColumns);
+                
+//            case "animal":            
+//                AnimalDAO animalDB = new AnimalDAO();
+//                animalDB.deleteAnimalById(id);
+//                break;
+//
+//            case "veterinary":
+//                VeterinaryDAO vetDB = new VeterinaryDAO();
+//                vetDB.deleteVeterinaryById(id);
+//                break;
+//                
+//            case "species":
+//                SpeciesDAO speciesDB = new SpeciesDAO();
+//                speciesDB.deleteSpeciesById(id);
+//                break;
+//                
+//            case "exam":
+//                ExamDAO examDB = new ExamDAO();
+//                examDB.deleteExamById(id);
+//                break;
+//                
+//            case "treatment":
+//                TreatmentDAO treatmentDB = new TreatmentDAO();
+//                treatmentDB.deleteTreatmentById(id);
+//                break;
+                
+            default:
+                return new EmptyTableModel();
+                
         }
     }
 }

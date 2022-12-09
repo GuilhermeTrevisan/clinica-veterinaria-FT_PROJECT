@@ -6,6 +6,8 @@ package view;
 
 import com.mycompany.clinicaveterinaria.Controller.NewAnimalController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
+import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
+import java.awt.Color;
 
 /**
  *
@@ -14,6 +16,7 @@ import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 public class NewAnimalWindow extends javax.swing.JFrame {
     
     private final NewAnimalController controller = new NewAnimalController();
+    private final ClientDAO clientController = new ClientDAO();
     private final UpdateScreenInterface screenUpdater;
 
     /**
@@ -61,6 +64,11 @@ public class NewAnimalWindow extends javax.swing.JFrame {
 
         jTextField4.setText("cliente");
         jTextField4.setToolTipText("");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,11 +140,22 @@ public class NewAnimalWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        controller.insert(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
+        
+        if(!this.clientController.getAllClientsName().contains(jTextField4.getText())) {
+            this.jTextField4.setBackground(Color.red);
+            this.jTextField4.setText("Cliente não encontrado, verifique o nome");
+            return;
+        }
+        
+        controller.insert(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), clientController.getClientByName(jTextField4.getText()).getId());
         setVisible(false);
         dispose();
         screenUpdater.reloadScreen();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+
+    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * @param args the command line arguments

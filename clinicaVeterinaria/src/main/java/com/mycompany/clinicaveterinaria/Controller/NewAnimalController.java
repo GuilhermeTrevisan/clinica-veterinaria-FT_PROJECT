@@ -14,7 +14,7 @@ public class NewAnimalController {
     
     private AnimalDAO db = new AnimalDAO();
     
-    public void insert(String name, String genre, String speciesId, String clientId) {
+    public void insert(String name, String genre, String speciesId, int clientId) {
         this.db.insertNewAnimal(name, genre, speciesId, clientId);
     }
 }

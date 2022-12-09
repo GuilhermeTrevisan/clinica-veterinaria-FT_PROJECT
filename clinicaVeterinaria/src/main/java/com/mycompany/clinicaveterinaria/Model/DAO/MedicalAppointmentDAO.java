@@ -53,6 +53,21 @@ public class MedicalAppointmentDAO extends DAO {
         return appoint;
     }
     
+    public List<MedicalAppointment> getAppointmentByDate(String date) throws ParseException {
+        List<MedicalAppointment> appoints = new ArrayList();
+        String query = "SELECT * FROM appointment WHERE date LIKE '%" + date + "%'";
+        ResultSet rs = getResultSet(query);
+
+        try {
+            while (rs.next()) {
+                appoints.add(buildObject(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return appoints;
+    }
+    
     public void insertNewAppointment(String date, String historic, int animalId, int vetId, int treatmentId) {
         try {
             PreparedStatement stmt;

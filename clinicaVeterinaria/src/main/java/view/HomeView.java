@@ -8,6 +8,9 @@ import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -60,8 +63,18 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Deletar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -280,6 +293,18 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
         jButton2.setBackground(jButton2.getBackground() == Color.red ? Color.LIGHT_GRAY : Color.red);
         deleting = !deleting;
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            this.jTable1.setModel(controller.search(viewSelected, jTextField2.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(HomeView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
