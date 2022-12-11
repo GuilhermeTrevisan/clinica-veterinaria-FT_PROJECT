@@ -1,5 +1,5 @@
-package TableModel;
-import com.mycompany.clinicaveterinaria.Model.POJO.Client;
+package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.POJO.MedicalAppointment;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
 
-public class ClientTableModel extends AbstractTableModel {
-    protected ArrayList<Client> vDados;
+public class AppointmentTableModel extends AbstractTableModel {
+    protected ArrayList<MedicalAppointment> vDados;
     protected String[] colunas;
 
-    public ClientTableModel(List vDados, String[] colunas) {
+    public AppointmentTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
         this.vDados = (ArrayList)vDados;
     }
@@ -42,7 +42,7 @@ public class ClientTableModel extends AbstractTableModel {
         return vDados.get(indiceLinha);
     }
 
-    public void addItem(Client obj) {
+    public void addItem(MedicalAppointment obj) {
         vDados.add(obj);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
@@ -53,9 +53,9 @@ public class ClientTableModel extends AbstractTableModel {
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListOfItems(List<Client> vItens) {
+    public void addListOfItems(List<MedicalAppointment> vItens) {
         this.clear();
-        for (Client obj : vItens){
+        for (MedicalAppointment obj : vItens){
             this.addItem(obj);
         }
     }
@@ -101,20 +101,20 @@ public class ClientTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Client client = this.vDados.get(rowIndex);
+        MedicalAppointment appoint = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return client.getId();
+                return appoint.getId();
             case 1:
-                return client.getName();
+                return appoint.getDate();
             case 2:
-                return client.getAddress();
+                return appoint.getHistoric();
             case 3:
-                return client.getCep();
+                return appoint.getAnimalId();
             case 4:
-                return client.getEmail();
+                return appoint.getVeterinaryId();
             case 5:
-                return client.getNumber();
+                return appoint.getTreatment_id();
             default:
                 return new Object();
         }

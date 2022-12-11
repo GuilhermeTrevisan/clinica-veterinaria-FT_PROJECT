@@ -1,5 +1,5 @@
-package TableModel;
-import com.mycompany.clinicaveterinaria.Model.POJO.Animal;
+package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.POJO.Treatment;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -9,12 +9,11 @@ import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
-
-public class AnimalTableModel extends AbstractTableModel {
-    protected ArrayList<Animal> vDados;
+public class TreatmentTableModel extends AbstractTableModel {
+    protected ArrayList<Treatment> vDados;
     protected String[] colunas;
 
-    public AnimalTableModel(List vDados, String[] colunas) {
+    public TreatmentTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
         this.vDados = (ArrayList)vDados;
     }
@@ -42,7 +41,7 @@ public class AnimalTableModel extends AbstractTableModel {
         return vDados.get(indiceLinha);
     }
 
-    public void addItem(Animal obj) {
+    public void addItem(Treatment obj) {
         vDados.add(obj);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
@@ -53,9 +52,9 @@ public class AnimalTableModel extends AbstractTableModel {
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListOfItems(List<Animal> vItens) {
+    public void addListOfItems(List<Treatment> vItens) {
         this.clear();
-        for (Animal obj : vItens){
+        for (Treatment obj : vItens){
             this.addItem(obj);
         }
     }
@@ -101,18 +100,16 @@ public class AnimalTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Animal animal = this.vDados.get(rowIndex);
+        Treatment treatment = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return animal.getId();
+                return treatment.getId();
             case 1:
-                return animal.getName();
+                return treatment.getAnimalId();
             case 2:
-                return animal.getGenre();
+                return treatment.getStartDate();
             case 3:
-                return animal.getSpeciesId();
-            case 4:
-                return animal.getClientId();
+                return treatment.getFinishDate();
             default:
                 return new Object();
         }

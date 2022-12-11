@@ -1,4 +1,4 @@
-package TableModel;
+package com.mycompany.clinicaveterinaria.TableModel;
 import com.mycompany.clinicaveterinaria.Model.POJO.MedicalAppointment;
 import java.awt.Rectangle;
 import java.util.List;

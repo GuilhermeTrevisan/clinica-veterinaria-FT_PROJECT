@@ -1,5 +1,5 @@
-package TableModel;
-import com.mycompany.clinicaveterinaria.Model.POJO.Veterinary;
+package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.POJO.Client;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -9,11 +9,12 @@ import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
-public class VeterinaryTableModel extends AbstractTableModel {
-    protected ArrayList<Veterinary> vDados;
+
+public class ClientTableModel extends AbstractTableModel {
+    protected ArrayList<Client> vDados;
     protected String[] colunas;
 
-    public VeterinaryTableModel(List vDados, String[] colunas) {
+    public ClientTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
         this.vDados = (ArrayList)vDados;
     }
@@ -41,7 +42,7 @@ public class VeterinaryTableModel extends AbstractTableModel {
         return vDados.get(indiceLinha);
     }
 
-    public void addItem(Veterinary obj) {
+    public void addItem(Client obj) {
         vDados.add(obj);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
@@ -52,9 +53,9 @@ public class VeterinaryTableModel extends AbstractTableModel {
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListOfItems(List<Veterinary> vItens) {
+    public void addListOfItems(List<Client> vItens) {
         this.clear();
-        for (Veterinary obj : vItens){
+        for (Client obj : vItens){
             this.addItem(obj);
         }
     }
@@ -100,16 +101,20 @@ public class VeterinaryTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Veterinary vet = this.vDados.get(rowIndex);
+        Client client = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return vet.getId();
+                return client.getId();
             case 1:
-                return vet.getName();
+                return client.getName();
             case 2:
-                return vet.getAddress();
+                return client.getAddress();
             case 3:
-                return vet.getNumber();
+                return client.getCep();
+            case 4:
+                return client.getEmail();
+            case 5:
+                return client.getNumber();
             default:
                 return new Object();
         }

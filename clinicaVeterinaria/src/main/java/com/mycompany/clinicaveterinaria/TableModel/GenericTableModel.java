@@ -1,5 +1,4 @@
-package TableModel;
-import com.mycompany.clinicaveterinaria.Model.POJO.MedicalAppointment;
+package com.mycompany.clinicaveterinaria.TableModel;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -8,13 +7,14 @@ import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
-
-
-public class AppointmentTableModel extends AbstractTableModel {
-    protected ArrayList<MedicalAppointment> vDados;
+/**
+ * @author Prof. Dr. Plinio Vilela - prvilela@unicamp.br
+ */
+public abstract class GenericTableModel extends AbstractTableModel {
+    protected ArrayList<Object> vDados;
     protected String[] colunas;
 
-    public AppointmentTableModel(List vDados, String[] colunas) {
+    public GenericTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
         this.vDados = (ArrayList)vDados;
     }
@@ -42,7 +42,7 @@ public class AppointmentTableModel extends AbstractTableModel {
         return vDados.get(indiceLinha);
     }
 
-    public void addItem(MedicalAppointment obj) {
+    public void addItem(Object obj) {
         vDados.add(obj);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
@@ -53,9 +53,9 @@ public class AppointmentTableModel extends AbstractTableModel {
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListOfItems(List<MedicalAppointment> vItens) {
+    public void addListOfItems(List<Object> vItens) {
         this.clear();
-        for (MedicalAppointment obj : vItens){
+        for (Object obj : vItens){
             this.addItem(obj);
         }
     }
@@ -77,6 +77,7 @@ public class AppointmentTableModel extends AbstractTableModel {
         }
     }
 
+    // Daqui pra baixo metodos adaptados de ViniGodoy - Curitiba - PR
     public void selectAndScroll(JTable table, int rowIndex) {
         table.getSelectionModel().setSelectionInterval(rowIndex, rowIndex);
         scrollToVisible(table, rowIndex);
@@ -97,26 +98,5 @@ public class AppointmentTableModel extends AbstractTableModel {
         Point pt = viewport.getViewPosition();
         position.setLocation(position.x - pt.x, position.y - pt.y);
         viewport.scrollRectToVisible(position);
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        MedicalAppointment appoint = this.vDados.get(rowIndex);
-        switch(columnIndex) {
-            case 0:
-                return appoint.getId();
-            case 1:
-                return appoint.getDate();
-            case 2:
-                return appoint.getHistoric();
-            case 3:
-                return appoint.getAnimalId();
-            case 4:
-                return appoint.getVeterinaryId();
-            case 5:
-                return appoint.getTreatment_id();
-            default:
-                return new Object();
-        }
     }
 }//GenericTableModel

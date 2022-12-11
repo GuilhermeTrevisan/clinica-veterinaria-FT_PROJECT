@@ -1,5 +1,5 @@
-package TableModel;
-import com.mycompany.clinicaveterinaria.Model.POJO.Exam;
+package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.POJO.Veterinary;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -9,11 +9,11 @@ import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
-public class ExamTableModel extends AbstractTableModel {
-    protected ArrayList<Exam> vDados;
+public class VeterinaryTableModel extends AbstractTableModel {
+    protected ArrayList<Veterinary> vDados;
     protected String[] colunas;
 
-    public ExamTableModel(List vDados, String[] colunas) {
+    public VeterinaryTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
         this.vDados = (ArrayList)vDados;
     }
@@ -41,7 +41,7 @@ public class ExamTableModel extends AbstractTableModel {
         return vDados.get(indiceLinha);
     }
 
-    public void addItem(Exam obj) {
+    public void addItem(Veterinary obj) {
         vDados.add(obj);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
@@ -52,9 +52,9 @@ public class ExamTableModel extends AbstractTableModel {
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListOfItems(List<Exam> vItens) {
+    public void addListOfItems(List<Veterinary> vItens) {
         this.clear();
-        for (Exam obj : vItens){
+        for (Veterinary obj : vItens){
             this.addItem(obj);
         }
     }
@@ -100,14 +100,16 @@ public class ExamTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Exam exam = this.vDados.get(rowIndex);
+        Veterinary vet = this.vDados.get(rowIndex);
         switch(columnIndex) {
             case 0:
-                return exam.getId();
+                return vet.getId();
             case 1:
-                return exam.getDescription();
+                return vet.getName();
             case 2:
-                return exam.getAppointmentId();
+                return vet.getAddress();
+            case 3:
+                return vet.getNumber();
             default:
                 return new Object();
         }

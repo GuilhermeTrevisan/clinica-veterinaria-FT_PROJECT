@@ -1,4 +1,5 @@
-package TableModel;
+package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.POJO.Exam;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -7,14 +8,12 @@ import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
-/**
- * @author Prof. Dr. Plinio Vilela - prvilela@unicamp.br
- */
-public abstract class GenericTableModel extends AbstractTableModel {
-    protected ArrayList<Object> vDados;
+
+public class ExamTableModel extends AbstractTableModel {
+    protected ArrayList<Exam> vDados;
     protected String[] colunas;
 
-    public GenericTableModel(List vDados, String[] colunas) {
+    public ExamTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
         this.vDados = (ArrayList)vDados;
     }
@@ -42,7 +41,7 @@ public abstract class GenericTableModel extends AbstractTableModel {
         return vDados.get(indiceLinha);
     }
 
-    public void addItem(Object obj) {
+    public void addItem(Exam obj) {
         vDados.add(obj);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
@@ -53,9 +52,9 @@ public abstract class GenericTableModel extends AbstractTableModel {
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListOfItems(List<Object> vItens) {
+    public void addListOfItems(List<Exam> vItens) {
         this.clear();
-        for (Object obj : vItens){
+        for (Exam obj : vItens){
             this.addItem(obj);
         }
     }
@@ -77,7 +76,6 @@ public abstract class GenericTableModel extends AbstractTableModel {
         }
     }
 
-    // Daqui pra baixo metodos adaptados de ViniGodoy - Curitiba - PR
     public void selectAndScroll(JTable table, int rowIndex) {
         table.getSelectionModel().setSelectionInterval(rowIndex, rowIndex);
         scrollToVisible(table, rowIndex);
@@ -98,5 +96,20 @@ public abstract class GenericTableModel extends AbstractTableModel {
         Point pt = viewport.getViewPosition();
         position.setLocation(position.x - pt.x, position.y - pt.y);
         viewport.scrollRectToVisible(position);
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Exam exam = this.vDados.get(rowIndex);
+        switch(columnIndex) {
+            case 0:
+                return exam.getId();
+            case 1:
+                return exam.getDescription();
+            case 2:
+                return exam.getAppointmentId();
+            default:
+                return new Object();
+        }
     }
 }//GenericTableModel

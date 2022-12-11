@@ -1,4 +1,8 @@
-package TableModel;
+package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.SpeciesDAO;
+import com.mycompany.clinicaveterinaria.Model.POJO.Animal;
+import com.mycompany.clinicaveterinaria.Model.POJO.Client;
 import com.mycompany.clinicaveterinaria.Model.POJO.Species;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -9,11 +13,15 @@ import javax.swing.JViewport;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 
-public class SpeciesTableModel extends AbstractTableModel {
-    protected ArrayList<Species> vDados;
-    protected String[] colunas;
 
-    public SpeciesTableModel(List vDados, String[] colunas) {
+public class AnimalTableModel extends AbstractTableModel {
+    protected ArrayList<Animal> vDados;
+    protected String[] colunas;
+    
+    private ClientDAO clientDAO = new ClientDAO();
+    private SpeciesDAO speciesDAO = new SpeciesDAO();
+
+    public AnimalTableModel(List vDados, String[] colunas) {
         this.colunas = colunas;
         this.vDados = (ArrayList)vDados;
     }
@@ -41,7 +49,7 @@ public class SpeciesTableModel extends AbstractTableModel {
         return vDados.get(indiceLinha);
     }
 
-    public void addItem(Species obj) {
+    public void addItem(Animal obj) {
         vDados.add(obj);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
@@ -52,9 +60,9 @@ public class SpeciesTableModel extends AbstractTableModel {
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListOfItems(List<Species> vItens) {
+    public void addListOfItems(List<Animal> vItens) {
         this.clear();
-        for (Species obj : vItens){
+        for (Animal obj : vItens){
             this.addItem(obj);
         }
     }
@@ -100,12 +108,29 @@ public class SpeciesTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Species species = this.vDados.get(rowIndex);
+        Animal animal = this.vDados.get(rowIndex);
+        
+        var species = speciesDAO.getSpeciesById(animal.getSpeciesId());
+        if (species == null) { 
+            species = new Species(0,"Não encontrado");
+        }
+        
+        var client = clientDAO.getUserById(animal.getClientId());
+        if (client == null) { 
+            client = new Client(-1,"Não encontrado", "", "", -1, ""); 
+        }
+        
         switch(columnIndex) {
             case 0:
-                return species.getId();
+                return animal.getId();
             case 1:
+                return animal.getName();
+            case 2:
+                return animal.getGenre();
+            case 3:
                 return species.getName();
+            case 4:
+                return client.getName();
             default:
                 return new Object();
         }

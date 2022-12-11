@@ -21,6 +21,7 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     MainController controller = new MainController();
     String viewSelected = "appointment";
     
+    private int function = 0;
     private Boolean deleting = false;
     private final UpdateScreenInterface screenUpdater = () -> { this.jTable1.setModel(controller.getTableModelOf(viewSelected)); };
     
@@ -30,6 +31,8 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
      */
     public HomeView(int function) {
         initComponents();
+        
+        this.function = function;
         
         if(function == 0 ) {
             jRadioButton1.setVisible(true);
@@ -48,6 +51,8 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
             jRadioButton5.setVisible(false);
             jRadioButton6.setVisible(true);
             jRadioButton7.setVisible(true);
+            var visibility = !(viewSelected.equals("appointment"));
+            jButton1.setVisible(visibility);
             jTextField2.setText("Pesquise consultas por data");
         }
         
@@ -253,36 +258,43 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         viewSelected = "appointment";
+        jButton1.setVisible(this.function == 0);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         viewSelected = "client";
+        jButton1.setVisible(true);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
         viewSelected = "animal";
+        jButton1.setVisible(true);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         viewSelected = "veterinary";
+        jButton1.setVisible(true);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }//GEN-LAST:event_jRadioButton4ActionPerformed
 
     private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
         viewSelected = "species";
+        jButton1.setVisible(true);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }//GEN-LAST:event_jRadioButton5ActionPerformed
 
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
         viewSelected = "exam";
+        jButton1.setVisible(true);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }//GEN-LAST:event_jRadioButton6ActionPerformed
 
     private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
         viewSelected = "treatment";
+        jButton1.setVisible(true);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }//GEN-LAST:event_jRadioButton7ActionPerformed
 
