@@ -26,11 +26,36 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     
     /**
      * Creates new form NewJFrame
+     * @param function
      */
-    public HomeView() {
+    public HomeView(int function) {
         initComponents();
         
+        if(function == 0 ) {
+            jRadioButton1.setVisible(true);
+            jRadioButton2.setVisible(true);
+            jRadioButton3.setVisible(true);
+            jRadioButton4.setVisible(true);
+            jRadioButton5.setVisible(true);
+            jRadioButton6.setVisible(false);
+            jRadioButton7.setVisible(false);
+            jTextField2.setText("Pesquise nome de clientes ou data de consultas");
+        } else {
+            jRadioButton1.setVisible(true);
+            jRadioButton2.setVisible(false);
+            jRadioButton3.setVisible(false);
+            jRadioButton4.setVisible(false);
+            jRadioButton5.setVisible(false);
+            jRadioButton6.setVisible(true);
+            jRadioButton7.setVisible(true);
+            jTextField2.setText("Pesquise consultas por data");
+        }
+        
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
+    }
+
+    private HomeView() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -62,14 +87,13 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Buscar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
