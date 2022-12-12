@@ -256,4 +256,9 @@ public class NewClientWindow extends javax.swing.JFrame implements UpdateScreenI
         }
         this.screenUpdater.reloadScreen();
     }
+
+    @Override
+    public void updateHistoric(String historic) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

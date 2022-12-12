@@ -1,4 +1,6 @@
 package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
+import com.mycompany.clinicaveterinaria.Model.POJO.Animal;
 import com.mycompany.clinicaveterinaria.Model.POJO.Treatment;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -101,11 +103,18 @@ public class TreatmentTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Treatment treatment = this.vDados.get(rowIndex);
+        
+        AnimalDAO animalDB = new AnimalDAO();
+        var animal = animalDB.getAnimalById(treatment.getAnimalId());
+        if (animal == null) { 
+            animal = new Animal(-1, "Não encontrado", "", -1, -1);
+        }
+        
         switch(columnIndex) {
             case 0:
                 return treatment.getId();
             case 1:
-                return treatment.getAnimalId();
+                return animal.getName();
             case 2:
                 return treatment.getStartDate();
             case 3:

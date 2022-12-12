@@ -12,4 +12,5 @@ public interface UpdateScreenInterface {
     void reloadScreen();
     void updateClient(boolean update);
     void finishTreatment(boolean finish);
+    void updateHistoric(String historic);
 }

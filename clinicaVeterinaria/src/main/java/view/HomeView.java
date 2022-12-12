@@ -5,6 +5,7 @@
 package view;
 import com.mycompany.clinicaveterinaria.Controller.MainController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
+import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,10 +13,9 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-// falta fazer a mesma coisa na tela de consultas
-// permitir inserção por nome de espécie em animais
 // permitir update no animal
-// guardar os sintmas
+// permitir update do historico da consulta
+// guardar os sintomas
 
 /**
  *
@@ -32,6 +32,8 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
     private int id;
     private int animal;
     private String initDate;
+    
+    AnimalDAO animalDAO = new AnimalDAO();
     
     /**
      * Creates new form NewJFrame
@@ -330,7 +332,8 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
             int row = jTable1.getSelectedRow();
             
             this.id = (int) jTable1.getValueAt(row, 0);
-            this.animal = (int) jTable1.getValueAt(row, 1);
+            var animalID = (String) jTable1.getValueAt(row, 1);
+            this.animal = animalDAO.getAnimalByName(animalID).getId();
             this.initDate = (String) jTable1.getValueAt(row, 2);
             
             FinishTreatmentView finishView = new FinishTreatmentView(this);
@@ -446,5 +449,10 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
             this.controller.finishTreatment(id, initDate, animal);
             this.jTable1.setModel(controller.getTableModelOf(viewSelected));
         }
+    }
+
+    @Override
+    public void updateHistoric(String historic) {
+        this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }
 }
