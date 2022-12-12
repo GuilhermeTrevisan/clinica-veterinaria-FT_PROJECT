@@ -6,6 +6,7 @@ package view;
 
 import com.mycompany.clinicaveterinaria.Controller.NewTreatmentController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
+import com.mycompany.clinicaveterinaria.Model.DummyUpdateScreen;
 
 /**
  *
@@ -150,7 +151,7 @@ public class NewTreatmentWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UpdateScreenInterface updater = () -> {};
+                UpdateScreenInterface updater = new DummyUpdateScreen();
                 new NewAppointWindow(updater).setVisible(true);
             }
         });

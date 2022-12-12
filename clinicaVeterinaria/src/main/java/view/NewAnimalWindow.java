@@ -7,6 +7,7 @@ package view;
 import com.mycompany.clinicaveterinaria.Controller.NewAnimalController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
+import com.mycompany.clinicaveterinaria.Model.DummyUpdateScreen;
 import java.awt.Color;
 
 /**
@@ -187,7 +188,7 @@ public class NewAnimalWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UpdateScreenInterface updater = () -> {};
+                UpdateScreenInterface updater = new DummyUpdateScreen();
                 new NewAnimalWindow(updater).setVisible(true);
             }
         });

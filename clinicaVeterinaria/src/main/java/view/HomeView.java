@@ -12,18 +12,21 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// falta fazer a mesma coisa na tela de consultas
+        // permitir encerramento de tratamento
+        // permitir inserção por nome de espécie em animais
+
 /**
  *
  * @author g170959
  */
-public class HomeView extends javax.swing.JFrame implements ActionListener {
+public class HomeView extends javax.swing.JFrame implements ActionListener, UpdateScreenInterface {
 
     MainController controller = new MainController();
     String viewSelected = "appointment";
     
     private int function = 0;
     private Boolean deleting = false;
-    private final UpdateScreenInterface screenUpdater = () -> { this.jTable1.setModel(controller.getTableModelOf(viewSelected)); };
     
     /**
      * Creates new form NewJFrame
@@ -299,7 +302,7 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_jRadioButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controller.openCreateViewFor(viewSelected, screenUpdater);
+        controller.openCreateViewFor(viewSelected, this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -318,6 +321,8 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
             int idCliente = (int) jTable1.getValueAt(row, 0);
             
             this.jTable1.setModel(controller.getTableModelOf(idCliente));
+        } else if(viewSelected.equals("treatment")) {
+            
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -411,5 +416,20 @@ public class HomeView extends javax.swing.JFrame implements ActionListener {
             controller.delete(viewSelected, id);
             this.jTable1.setModel(controller.getTableModelOf(viewSelected));
         }
+    }
+    
+    @Override
+    public void reloadScreen() { 
+        this.jTable1.setModel(controller.getTableModelOf(viewSelected));
+    };
+    
+    @Override
+    public void updateClient(boolean update) {
+        this.jTable1.setModel(controller.getTableModelOf(viewSelected));
+    }
+    
+    @Override
+    public void finishTreatment(boolean finish) {
+        
     }
 }

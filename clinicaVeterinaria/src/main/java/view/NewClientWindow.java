@@ -7,6 +7,7 @@ package view;
 import com.mycompany.clinicaveterinaria.Controller.NewClientController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
+import com.mycompany.clinicaveterinaria.Model.DummyUpdateScreen;
 import java.awt.Color;
 import java.util.regex.Pattern;
 
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
  *
  * @author Guizera
  */
-public class NewClientWindow extends javax.swing.JFrame {
+public class NewClientWindow extends javax.swing.JFrame implements UpdateScreenInterface {
     
     private NewClientController controller = new NewClientController();
     private final ClientDAO clientController = new ClientDAO();
@@ -41,14 +42,6 @@ public class NewClientWindow extends javax.swing.JFrame {
 
         return Pattern.compile(regexPattern)
           .matcher(cep)
-          .matches();
-    }
-    
-    private static boolean isNumberValid(String number) {
-        String regexPattern = "/^(?:(?:\\+|00)?(55)\\s?)?(?:(?:\\(?[1-9][0-9]\\)?)?\\s?)?(?:((?:9\\d|[2-9])\\d{3})-?(\\d{4}))$/";
-
-        return Pattern.compile(regexPattern)
-          .matcher(number)
           .matches();
     }
 
@@ -161,20 +154,15 @@ public class NewClientWindow extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(this.clientController.getAllClientsName().contains(jTextField1.getText())) {
-            this.jTextField1.setBackground(Color.red);
-            this.jTextField1.setText("Nome já utlizado");
+            UpdateClientView updateView = new UpdateClientView(this);
+            updateView.setVisible(true);
+            
+//            this.jTextField1.setBackground(Color.red);
+//            this.jTextField1.setText("Nome já utlizado");
             return;
         } else {
             this.jTextField1.setBackground(Color.WHITE);
         }
-        
-//        if(!isNumberValid(jTextField3.getText())) {
-//            this.jTextField3.setBackground(Color.red);
-//            this.jTextField3.setText("Insira um número válido");
-//            return;
-//        } else {
-//            this.jTextField3.setBackground(Color.WHITE);
-//        }
         
         if(!isCEPValid(jTextField4.getText())) {
             this.jTextField4.setBackground(Color.red);
@@ -232,7 +220,7 @@ public class NewClientWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UpdateScreenInterface updater = () -> { return; };
+                UpdateScreenInterface updater = new DummyUpdateScreen();
                 new NewClientWindow(updater).setVisible(true);
             }
         });
@@ -248,4 +236,24 @@ public class NewClientWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void reloadScreen() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public void finishTreatment(boolean finish) {
+        
+    }
+    
+    @Override
+    public void updateClient(boolean update) {
+        if (update) {
+            System.out.println(jTextField1.getText());
+            clientController.updateClientById(clientController.getClientByName(jTextField1.getText()).getId(), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), Long.parseLong(jTextField4.getText()), jTextField5.getText());
+            this.setVisible(false);
+        }
+        this.screenUpdater.reloadScreen();
+    }
 }

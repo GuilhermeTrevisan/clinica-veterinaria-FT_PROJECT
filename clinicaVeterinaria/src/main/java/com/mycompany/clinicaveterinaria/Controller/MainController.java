@@ -28,6 +28,7 @@ import view.NewExamWindow;
 import view.NewSpeciesWindow;
 import view.NewTreatmentWindow;
 import view.NewVetWindow;
+import view.UpdateClientView;
 
 /**
  *

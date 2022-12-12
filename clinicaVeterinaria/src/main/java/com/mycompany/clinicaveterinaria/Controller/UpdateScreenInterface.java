@@ -10,4 +10,6 @@ package com.mycompany.clinicaveterinaria.Controller;
  */
 public interface UpdateScreenInterface {
     void reloadScreen();
+    void updateClient(boolean update);
+    void finishTreatment(boolean finish);
 }

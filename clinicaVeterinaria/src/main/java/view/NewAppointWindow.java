@@ -10,6 +10,7 @@ import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.MedicalAppointmentDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
+import com.mycompany.clinicaveterinaria.Model.DummyUpdateScreen;
 import java.awt.Color;
 
 /**
@@ -245,7 +246,7 @@ public class NewAppointWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                UpdateScreenInterface updater = () -> {};
+                UpdateScreenInterface updater = new DummyUpdateScreen();
                 new NewAppointWindow(updater).setVisible(true);
             }
         });
