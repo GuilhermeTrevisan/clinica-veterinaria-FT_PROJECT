@@ -25,4 +25,9 @@ public class DummyUpdateScreen implements UpdateScreenInterface {
     public void finishTreatment(boolean finish) {
         return;
     }
+
+    @Override
+    public void updateHistoric(String historic) {
+        return;
+    }
 }

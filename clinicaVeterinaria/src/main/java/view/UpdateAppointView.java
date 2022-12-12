@@ -18,9 +18,10 @@ public class UpdateAppointView extends javax.swing.JFrame {
     /**
      * Creates new form UpdateAppointView
      */
-    public UpdateAppointView(UpdateScreenInterface screenUpdater) {
+    public UpdateAppointView(UpdateScreenInterface screenUpdater, String hist) {
         this.screenUpdater = screenUpdater;
         initComponents();
+        jTextArea1.setText(hist);
     }
 
     /**
@@ -51,6 +52,11 @@ public class UpdateAppointView extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -93,7 +99,12 @@ public class UpdateAppointView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         screenUpdater.updateHistoric(jTextArea1.getText());
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,7 +137,7 @@ public class UpdateAppointView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 UpdateScreenInterface updater = new DummyUpdateScreen();; 
-                new UpdateAppointView(updater).setVisible(true);
+                new UpdateAppointView(updater, "").setVisible(true);
             }
         });
     }

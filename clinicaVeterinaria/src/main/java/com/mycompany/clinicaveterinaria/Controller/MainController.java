@@ -20,6 +20,8 @@ import com.mycompany.clinicaveterinaria.Model.DAO.ExamDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.SpeciesDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
+import com.mycompany.clinicaveterinaria.Model.POJO.Animal;
+import com.mycompany.clinicaveterinaria.Model.POJO.Veterinary;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +32,6 @@ import view.NewExamWindow;
 import view.NewSpeciesWindow;
 import view.NewTreatmentWindow;
 import view.NewVetWindow;
-import view.UpdateClientView;
 
 /**
  *
@@ -87,6 +88,11 @@ public class MainController {
          LocalDateTime now = LocalDateTime.now();  
          var finishDate = dtf.format(now);
          treatmentDB.updateTreatmentById(id, initDate, finishDate, animalId );
+    }
+    
+    public void updateHistoric(int id, String historic) {
+        MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
+        appointDB.updateHistoricById(id, historic);
     }
     
     public AbstractTableModel getTableModelOf(int clientId) {

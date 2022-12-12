@@ -33,6 +33,9 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
     private int animal;
     private String initDate;
     
+    private int appointId;
+    private String appointHist;
+    
     AnimalDAO animalDAO = new AnimalDAO();
     
     /**
@@ -338,6 +341,14 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
             
             FinishTreatmentView finishView = new FinishTreatmentView(this);
             finishView.setVisible(true);
+        } else if(viewSelected.equals("appointment")) {
+            int row = jTable1.getSelectedRow();
+            
+            this.appointId = (int) jTable1.getValueAt(row, 0);
+            this.appointHist = (String) jTable1.getValueAt(row, 2);
+            
+            UpdateAppointView appointView = new UpdateAppointView(this, this.appointHist);
+            appointView.setVisible(true);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -453,6 +464,7 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
 
     @Override
     public void updateHistoric(String historic) {
+        this.controller.updateHistoric(this.appointId, historic);
         this.jTable1.setModel(controller.getTableModelOf(viewSelected));
     }
 }

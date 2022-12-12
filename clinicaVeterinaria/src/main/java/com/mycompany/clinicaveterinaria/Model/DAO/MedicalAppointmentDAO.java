@@ -99,6 +99,18 @@ public class MedicalAppointmentDAO extends DAO {
         }
     }
     
+    public void updateHistoricById(int id, String historic) {
+        try {
+            PreparedStatement stmt;
+            stmt = DAO.getConnection().prepareStatement("UPDATE appointment SET historic=? WHERE id=?");
+            stmt.setString(1, historic);
+            stmt.setInt(2, id);
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+    
     public void deleteAppointmentById(int id) {
         PreparedStatement stmt;
         try {
