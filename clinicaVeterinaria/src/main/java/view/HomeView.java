@@ -13,8 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 // falta fazer a mesma coisa na tela de consultas
-        // permitir encerramento de tratamento
-        // permitir inserção por nome de espécie em animais
+// permitir inserção por nome de espécie em animais
+// permitir update no animal
+// guardar os sintmas
 
 /**
  *
@@ -27,6 +28,10 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
     
     private int function = 0;
     private Boolean deleting = false;
+    
+    private int id;
+    private int animal;
+    private String initDate;
     
     /**
      * Creates new form NewJFrame
@@ -322,7 +327,14 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
             
             this.jTable1.setModel(controller.getTableModelOf(idCliente));
         } else if(viewSelected.equals("treatment")) {
+            int row = jTable1.getSelectedRow();
             
+            this.id = (int) jTable1.getValueAt(row, 0);
+            this.animal = (int) jTable1.getValueAt(row, 1);
+            this.initDate = (String) jTable1.getValueAt(row, 2);
+            
+            FinishTreatmentView finishView = new FinishTreatmentView(this);
+            finishView.setVisible(true);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -430,6 +442,9 @@ public class HomeView extends javax.swing.JFrame implements ActionListener, Upda
     
     @Override
     public void finishTreatment(boolean finish) {
-        
+        if(finish) {
+            this.controller.finishTreatment(id, initDate, animal);
+            this.jTable1.setModel(controller.getTableModelOf(viewSelected));
+        }
     }
 }

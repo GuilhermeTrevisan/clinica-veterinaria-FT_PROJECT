@@ -80,7 +80,6 @@ public class ClientDAO extends DAO {
     
     public Client getClientByName(String name) { 
         String query = "SELECT * FROM client WHERE name = '" + name  + "'";
-        System.out.println(query);
         ResultSet rs = getResultSet(query);
 
         Client client = null;

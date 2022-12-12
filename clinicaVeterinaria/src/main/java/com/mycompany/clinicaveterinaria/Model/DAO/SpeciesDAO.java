@@ -51,6 +51,19 @@ public class SpeciesDAO extends DAO {
         return species;
     }
     
+        public Species getSpeciesByName(String name) {
+        String query = "SELECT * FROM species WHERE name = '" + name  + "'";
+        ResultSet rs = getResultSet(query);
+
+        Species species = null;
+        try {
+            species = new Species(rs.getInt("id"), rs.getString("name"));
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+        return species;
+    }
+    
     public void insertNewSpecies(String name) {
         try {
             PreparedStatement stmt;

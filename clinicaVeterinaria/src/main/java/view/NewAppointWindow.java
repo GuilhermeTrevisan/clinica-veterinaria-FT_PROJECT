@@ -86,7 +86,7 @@ public class NewAppointWindow extends javax.swing.JFrame {
 
         jTextField4.setText("veterinário");
 
-        jTextField5.setText("tratamento (zero caso não exista)");
+        jTextField5.setText("id tratamento (zero caso não exista)");
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

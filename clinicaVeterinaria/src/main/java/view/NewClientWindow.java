@@ -244,7 +244,7 @@ public class NewClientWindow extends javax.swing.JFrame implements UpdateScreenI
     
     @Override
     public void finishTreatment(boolean finish) {
-        
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     @Override

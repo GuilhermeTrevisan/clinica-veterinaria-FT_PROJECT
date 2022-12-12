@@ -21,6 +21,8 @@ import com.mycompany.clinicaveterinaria.Model.DAO.SpeciesDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.TreatmentDAO;
 import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import view.NewAnimalWindow;
 import view.NewAppointWindow;
 import view.NewClientWindow;
@@ -41,7 +43,7 @@ public class MainController {
         switch (tableModel) {
             case "appointment":
                 MedicalAppointmentDAO appointDB = new MedicalAppointmentDAO();
-                String[] appointColumns = {"id", "data", "histórico", "id do animal", "id do veterinário", "id do tratamento"};
+                String[] appointColumns = {"id", "data", "histórico", "animal", "veterinário", "id do tratamento"};
                 return new AppointmentTableModel(appointDB.getAllAppointments(), appointColumns);
                 
             case "client":
@@ -51,7 +53,7 @@ public class MainController {
                 
             case "animal":            
                 AnimalDAO animalDB = new AnimalDAO();
-                String[] animalColumns = {"id", "nome", "genero", "id da espécie", "id do cliente"};
+                String[] animalColumns = {"id", "nome", "genero", "espécie", "id do cliente"};
                 return new AnimalTableModel(animalDB.getAllAnimals(), animalColumns);
 
             case "veterinary":
@@ -77,6 +79,14 @@ public class MainController {
             default:
                 return new EmptyTableModel();
         }
+    }
+    
+    public void finishTreatment(int id, String initDate, int animalId) {
+         TreatmentDAO treatmentDB = new TreatmentDAO();
+         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+         LocalDateTime now = LocalDateTime.now();  
+         var finishDate = dtf.format(now);
+         treatmentDB.updateTreatmentById(id, initDate, finishDate, animalId );
     }
     
     public AbstractTableModel getTableModelOf(int clientId) {

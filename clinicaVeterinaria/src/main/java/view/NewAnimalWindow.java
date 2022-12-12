@@ -7,6 +7,7 @@ package view;
 import com.mycompany.clinicaveterinaria.Controller.NewAnimalController;
 import com.mycompany.clinicaveterinaria.Controller.UpdateScreenInterface;
 import com.mycompany.clinicaveterinaria.Model.DAO.ClientDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.SpeciesDAO;
 import com.mycompany.clinicaveterinaria.Model.DummyUpdateScreen;
 import java.awt.Color;
 
@@ -18,6 +19,7 @@ public class NewAnimalWindow extends javax.swing.JFrame {
     
     private final NewAnimalController controller = new NewAnimalController();
     private final ClientDAO clientController = new ClientDAO();
+    private final SpeciesDAO speciesController = new SpeciesDAO();
     private final UpdateScreenInterface screenUpdater;
 
     /**
@@ -148,7 +150,9 @@ public class NewAnimalWindow extends javax.swing.JFrame {
             return;
         }
         
-        controller.insert(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), clientController.getClientByName(jTextField4.getText()).getId());
+        var species = speciesController.getSpeciesByName(jTextField3.getText());
+        
+        controller.insert(jTextField1.getText(), jTextField2.getText(),String.valueOf(species.getId()), clientController.getClientByName(jTextField4.getText()).getId());
         setVisible(false);
         dispose();
         screenUpdater.reloadScreen();

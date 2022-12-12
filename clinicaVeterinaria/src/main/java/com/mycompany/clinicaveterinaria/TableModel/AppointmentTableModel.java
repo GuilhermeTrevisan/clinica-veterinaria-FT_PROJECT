@@ -1,5 +1,9 @@
 package com.mycompany.clinicaveterinaria.TableModel;
+import com.mycompany.clinicaveterinaria.Model.DAO.AnimalDAO;
+import com.mycompany.clinicaveterinaria.Model.DAO.VeterinaryDAO;
+import com.mycompany.clinicaveterinaria.Model.POJO.Animal;
 import com.mycompany.clinicaveterinaria.Model.POJO.MedicalAppointment;
+import com.mycompany.clinicaveterinaria.Model.POJO.Veterinary;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -102,6 +106,19 @@ public class AppointmentTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         MedicalAppointment appoint = this.vDados.get(rowIndex);
+        
+        AnimalDAO animalDB = new AnimalDAO();
+        var animal = animalDB.getAnimalById(appoint.getAnimalId());
+        if (animal == null) { 
+            animal = new Animal(-1, "Não encontrado", "", -1, -1);
+        }
+        
+        VeterinaryDAO vetDB = new VeterinaryDAO();
+        var vet = vetDB.getVeterinaryById(appoint.getVeterinaryId());
+        if (vet == null) { 
+            vet = new Veterinary(-1, "Não encontrado", "", "");
+        }
+        
         switch(columnIndex) {
             case 0:
                 return appoint.getId();
@@ -110,9 +127,9 @@ public class AppointmentTableModel extends AbstractTableModel {
             case 2:
                 return appoint.getHistoric();
             case 3:
-                return appoint.getAnimalId();
+                return animal.getName();
             case 4:
-                return appoint.getVeterinaryId();
+                return vet.getName();
             case 5:
                 return appoint.getTreatment_id();
             default:
