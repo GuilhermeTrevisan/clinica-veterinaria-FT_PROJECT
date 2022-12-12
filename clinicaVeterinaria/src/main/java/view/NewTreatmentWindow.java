@@ -50,7 +50,7 @@ public class NewTreatmentWindow extends javax.swing.JFrame {
 
         jTextField2.setText("data de fim");
 
-        jTextField3.setText("animal");
+        jTextField3.setText("id animal");
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

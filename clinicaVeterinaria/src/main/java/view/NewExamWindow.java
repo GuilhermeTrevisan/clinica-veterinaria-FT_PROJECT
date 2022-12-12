@@ -47,7 +47,7 @@ public class NewExamWindow extends javax.swing.JFrame {
 
         jTextField1.setText("descrição");
 
-        jTextField2.setText("consulta");
+        jTextField2.setText("id consulta");
 
         jButton1.setText("cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
